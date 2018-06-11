@@ -4,4 +4,5 @@ run curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum
     dnf -y install yarn && \
     npm install gulp-cli -g
 
+workdir /antora
 

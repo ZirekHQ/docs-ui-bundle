@@ -1,0 +1,8 @@
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+{{> breadcrumbs}}
+{{> page-versions}}
+  {{#if page.editUrl}}
+  <div class="edit-this-page"><a href="{{page.editUrl}}">Edit this Page</a></div>
+  {{/if}}
+</div>

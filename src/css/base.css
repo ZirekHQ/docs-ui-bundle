@@ -35,6 +35,15 @@ body {
   margin: 0;
 }
 
+@media print {
+  body {
+    padding-top: 0;
+  }
+  nav.navbar {
+    position: fixed;
+  }
+}
+
 a {
   text-decoration: none;
 }

@@ -1,3 +1,54 @@
+div.homepage-section h3,
+div.homepage-section p {
+    color: #222;
+    margin: 0;
+}
+
+div.homepage-section-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.homepage-section a.homepage-link {
+    display: block;
+    padding: 16px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+div.homepage-section a.homepage-link:hover {
+    text-decoration: none;
+}
+
+div.homepage-section a.homepage-link-primary {
+    background-color: #ccc;
+    flex: 1 1 300px;
+}
+
+div.homepage-section a.homepage-link-primary:hover {
+    background-color: #ddd;
+}
+
+div.homepage-section a.homepage-link-secondary {
+    background-color: #eee;
+    font-size: 0.8em;
+    flex: 1 1 200px;
+}
+
+div.homepage-section a.homepage-link-secondary:hover {
+    background-color: #f3f3f3;
+    font-size: 0.8em;
+}
+
+div.homepage-section a.homepage-link-secondary p {
+    font-size: 1em;
+}
+
+
+
+
+
+
 div.home-page div.container-header {
     padding: 20px 10px 0;
 }

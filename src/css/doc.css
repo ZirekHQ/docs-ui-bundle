@@ -25,17 +25,17 @@
 }
 
 article.doc h1 {
-  font-family: Montserrat,sans-serif;
+  font-family: "Open sans", Helvetica, Arial;
   font-weight: 500;
   color: #294172!important;
 }
 
 ul.nav-list {
-  font-family: Open sans,Helvetica,Arial;
+  font-family: "Open sans", Helvetica, Arial;
 }
 
 .doc h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Open sans", Helvetica, Arial;
   font-size: 24px;
 }
 
@@ -269,12 +269,12 @@ ul.nav-list {
   margin-right: -1rem;
   padding: 0.4rem 1.5rem 0.1rem;
   font-size: 36px;
-  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-family: "Open sans", Helvetica, Arial;
 }
 
 .doc p {
   font-size: 18px;
-  font-family: "Open sans", Helvetica, Arial;
   margin: 0;
 }
 

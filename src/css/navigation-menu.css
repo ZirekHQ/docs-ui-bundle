@@ -25,7 +25,7 @@ html.is-clipped--nav {
 }
 
 .navigation-container, .navigation-menu {
-  background-color: #f3f3f3;
+  background-color: #dedede;
 }
 
 .nav-menu {
@@ -145,7 +145,7 @@ ul.nav-list ul.nav-list .nav-item  {
 
 .is-current-page > .nav-link,
 .is-current-page > .nav-text {
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .nav-toggle + .nav-link,

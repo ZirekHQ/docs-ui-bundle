@@ -26,7 +26,7 @@
 
 article.doc h1 {
   font-family: "Open sans", Helvetica, Arial;
-  font-weight: 500;
+  font-weight: 600;
   color: #294172!important;
 }
 
@@ -271,6 +271,11 @@ ul.nav-list {
   font-size: 36px;
   font-weight: 600;
   font-family: "Open sans", Helvetica, Arial;
+}
+
+article.doc h2 {
+  border-bottom: solid #0275d8!important;
+  padding: .4rem 0.9rem .1rem!important;
 }
 
 .doc p {

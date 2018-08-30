@@ -64,18 +64,14 @@ div.home-page div.container-header h2{
     padding: 0;
 }
 
-.doc h2:not(.discrete) {
-    border-bottom: 1px solid #ddd;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    padding: 0.8rem 1.5rem 0.8rem;
-    font-size: 34px;
-    font-family: "Open sans", Helvetica, Arial;
-    margin-top: 1em;
-    font-weight: 600;
-    margin-bottom: 0.3em;
+.homepage-page div h2 {
+    margin: 1em -1rem .3em;
+    padding: .8rem 1.5rem!important;
+    font-size: 34px!important;
     color: #294172!important;
-    background-image: linear-gradient(180deg,#eee 0,#ddd);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#eee),to(#ddd));
+    background-image: linear-gradient(180deg,#eee,#ddd);
+    border-bottom: none!important;
 }
 
 div.home-page div.container-releases,

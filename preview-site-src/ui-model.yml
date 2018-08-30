@@ -69,9 +69,6 @@ page:
     url: '#'
   navigation:
   - root: true
-    content: Project XYZ
-    url: '#'
-    urlType: fragment
     items:
     - content: Quickstart
       url: '#'

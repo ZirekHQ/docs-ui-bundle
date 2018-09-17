@@ -119,6 +119,7 @@ ul.nav-list {
   width: 50%;
   float: right;
   margin: 0 -20px 0 20px;
+  border: 20px white solid;
 }
 
 .doc table.tableblock {

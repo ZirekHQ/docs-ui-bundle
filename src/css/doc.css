@@ -115,6 +115,12 @@ ul.nav-list {
   margin: 1rem 0 0;
 }
 
+.doc .sidebarblock.width50 {
+  width: 50%;
+  float: right;
+  margin: 0 -20px 0 20px;
+}
+
 .doc table.tableblock {
   border-collapse: collapse;
   font-size: 0.8em;

@@ -226,6 +226,26 @@ ul.nav-list {
   background-color: #e18114;
 }
 
+.doc .admonitionblock.caution td.content {
+  border: 1px solid #a0439c;
+}
+
+.doc .admonitionblock.important td.content {
+  border: 1px solid #d32f2f;
+}
+
+.doc .admonitionblock.note td.content {
+  border: 1px solid #217ee7;
+}
+
+.doc .admonitionblock.tip td.content {
+  border: 1px solid #41af46;
+}
+
+.doc .admonitionblock.warning td.content {
+  border: 1px solid #e18114;
+}
+
 .doc .admonitionblock .icon i {
   display: inline-flex;
   align-items: center;
@@ -599,3 +619,10 @@ kbd,
   content: ">";
   font-weight: 500;
 }
+
+.qanda li p:first-child {
+  font-weight: 600;
+  margin-top: 20px;
+  margin-left: -20px;
+}
+

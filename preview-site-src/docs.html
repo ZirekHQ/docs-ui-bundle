@@ -330,6 +330,33 @@ Est in reque homero principes, meis deleniti mediocrem ad has.
 Altera atomorum his ex, has cu elitr melius propriae.
 Eos suscipit scaevola at.</p>
 </div>
+<h1>Frequently Asked Questions (FAQ)</h1>
+<div class="qlist qanda">
+<ol>
+<li>
+<p><em>Exactly what problem are you trying to solve?</em></p>
+<p>The “too fast vs. too slow” problem, outdated containers, and complex packaging workflow.
+See The Problem to be Solved page for more detailed information.</p>
+</li>
+<li>
+<p><em>How is this different from containers?</em></p>
+<p>This is a build step that happens before containers.
+Modularity provides parallel availability of multiple versions that can be consumed by containers to enable parallel installation.</p>
+</li>
+<li>
+<p><em>How does this differ from Software Collections (SCLs)?</em></p>
+<p>Modularity is about building multiple versions of packages, and making them all available to users.
+SCLs are about installing software in parallel using RPM.
+These two don’t overlap, they complement each other. You can build a modular SCL.</p>
+</li>
+<li>
+<p><em>Couldn’t we solve this with having compat packages, or putting versions into package names for different version streams?</em></p>
+<p>That works technically, but the packaging workload doesn’t scale, and dependency interactions become complex. This will let packagers make more content available to users without an explosion of effort.
+Modules also help to solve the discoverability problem.
+For example, is httpd v2.4 in a package called httpd-2-4 or http-2?</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>

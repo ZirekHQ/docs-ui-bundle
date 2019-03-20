@@ -1,0 +1,33 @@
+#!/bin/sh
+
+
+if [ "$1" == "homepage" ]; then
+    cp preview-site-src/homepage.html preview-site-src/index.html
+    cp src/layouts/homepage.hbs src/layouts/default.hbs
+
+elif [ "$1" == "without_menu" ]; then
+    cp preview-site-src/docs.html preview-site-src/index.html
+    cp src/layouts/without_menu.hbs src/layouts/default.hbs
+
+elif [ "$1" == "with_menu" ]; then
+    cp preview-site-src/docs.html preview-site-src/index.html
+    cp src/layouts/with_menu.hbs src/layouts/default.hbs
+
+elif [ "$1" == "search" ]; then
+    cp preview-site-src/search.html preview-site-src/index.html
+    cp src/layouts/search.hbs src/layouts/default.hbs
+
+else
+    echo "This script allow you to preview different layouts of the site"
+    ehco ""
+    echo "Usage:"
+    echo "$0 COMMAND"
+    echo ""
+    echo "Commands:"
+    echo "  homepage     — the fedora docs homepage"
+    echo "  with_menu    - the docs layout with a menu on the left"
+    echo "  without_menu — the docs layout but without the menu"
+    echo "  search       - the search page"
+    echo ""
+    exit 1
+fi

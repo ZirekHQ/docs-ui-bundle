@@ -7,8 +7,8 @@ if [ "$1" == "install" ]; then
 elif [ "$1" == "preview" ]; then
     cmd="gulp preview"
 
-elif [ "$1" == "bundle" ]; then
-    cmd="gulp bundle"
+elif [ "$1" == "pack" ]; then
+    cmd="gulp pack"
 
 else
     echo "Usage:"
@@ -17,7 +17,7 @@ else
     echo "Commands:"
     echo "  install — install dependencies"
     echo "  preview — live preview of the UI"
-    echo "  bundle  - build the zip bundle"
+    echo "  pack    - build the zip bundle"
     echo ""
     exit 1
 fi

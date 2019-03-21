@@ -64,7 +64,7 @@
 
         output += `
           <div class="search-result">
-            <h3><a href="">${response.hits.hits[i]._source.title}</a></h3>
+            <h3><a href="${response.hits.hits[i]._source.url}">${response.hits.hits[i]._source.title}</a></h3>
             <p style="color: #666">Docs / ${response.hits.hits[i]._source.component.name}</p>
             <p>${response.hits.hits[i].highlight["body.search"][0]}</p>
             <hr>

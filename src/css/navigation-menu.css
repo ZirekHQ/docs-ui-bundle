@@ -33,6 +33,14 @@ html.is-clipped--nav {
   min-height: 0;
 }
 
+nav.nav-menu span.nav-text strong {
+  text-transform: uppercase;
+  display: block;
+  color: #294172;
+  margin-top: 16px;
+  font-size: 0.9em;
+}
+
 .nav-menu h3.title {
   margin: 0;
   font-weight: 500;

@@ -415,7 +415,6 @@ article.doc h2 {
 }
 
 .doc ul.checklist {
-  padding-left: 0.5rem;
   list-style: none;
 }
 
@@ -425,6 +424,7 @@ article.doc h2 {
   justify-content: center;
   width: 1rem;
   margin-right: 0.25rem;
+  margin-left: -1.5rem;
 }
 
 .doc ul.checklist i.fa-check-square-o::before {

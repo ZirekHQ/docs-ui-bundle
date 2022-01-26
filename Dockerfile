@@ -1,8 +1,12 @@
-from fedora:27
+FROM fedora:35
 
-run curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
-    dnf -y install yarn && \
-    npm install gulp-cli -g
+RUN dnf -y module install nodejs:16/minimal && \
+    dnf clean all
 
-workdir /antora
+WORKDIR /antora
+RUN npm install -g gulp-cli
+ADD package*.json .
+RUN npm install
 
+ADD . /antora
+ENTRYPOINT ["gulp"]

@@ -24,13 +24,13 @@ fi
 
 if [ "$(uname)" == "Darwin" ]; then
     # Running on macOS.
-    docker run --rm -it -v $(pwd):/antora -p 5252:5252 asamalik/antora-ui-builder $cmd
+    docker run --rm -it -v $(pwd):/antora -p 5252:5252 fedora-docs-ui $cmd
 
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Running on Linux.
 
     if [ -f /usr/bin/podman ]; then
-	podman run --rm -it -v $(pwd):/antora:z -p 5252:5252 asamalik/antora-ui-builder $cmd
+	podman run --rm -it -v $(pwd):/antora:z -p 5252:5252 fedora-docs-ui $cmd
 
     else
         echo ""

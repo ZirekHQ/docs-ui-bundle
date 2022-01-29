@@ -9,6 +9,7 @@
   .doc {
     margin: 0 2rem;
     max-width: 54rem;
+    min-width: 0;
   }
 }
 

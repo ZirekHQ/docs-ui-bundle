@@ -60,6 +60,7 @@
 
 .navigation-explore .component .title {
   font-weight: 500;
+  color: inherit;
 }
 
 .navigation-explore .versions {

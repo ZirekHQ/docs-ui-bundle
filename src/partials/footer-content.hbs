@@ -1,4 +1,8 @@
 <footer class="footer">
   <p>All Fedora Documentation content available under <a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">CC BY-SA 4.0</a> or, when specifically noted, under another <a href="https://fedoraproject.org/wiki/Licensing:Main">accepted</a> free and open content license.</p>
-  <p>Last build: {{{env.ANTORA_DATE}}}</p>
+  <p>
+    {{~#if env.ANTORA_DATE}}Last build: {{{env.ANTORA_DATE}}} {{/if~}}
+    {{~#if page.attributes.creation-date}}Creation date: {{{page.attributes.creation-date}}} {{/if~}}
+    {{~#if page.attributes.last-updated}}Last update: {{{page.attributes.last-updated}}} {{/if~}}
+  </p>
 </footer>

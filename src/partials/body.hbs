@@ -1,5 +1,5 @@
 <div class="body">
-{{#if (eq page.layout 'with_menu')}}
+{{#if (or (eq page.layout 'with_menu') (eq page.layout '404'))}}
 {{> navigation}}
 {{/if}}
 {{> main}}

@@ -1,12 +1,10 @@
 ;(function () {
   'use strict'
 
- try {
-
   var SECT_CLASS_RX = /^sect(\d)$/
 
-  var navContainer = document.querySelector('.navigation-container')
-  var navToggle = document.querySelector('.navigation-toggle')
+  var navContainer = document.querySelector('.nav-container')
+  var navToggle = document.querySelector('.nav-toggle')
 
   navToggle.addEventListener('click', showNav)
   navContainer.addEventListener('click', trapEvent)
@@ -14,7 +12,7 @@
   var menuPanel = navContainer.querySelector('[data-panel=menu]')
   if (!menuPanel) return
   var explorePanel = navContainer.querySelector('[data-panel=explore]')
-  var nav = navContainer.querySelector('.navigation')
+  var nav = navContainer.querySelector('.nav')
 
   var currentPageItem = menuPanel.querySelector('.is-current-page')
   var originalPageItem = currentPageItem
@@ -25,7 +23,7 @@
     menuPanel.scrollTop = 0
   }
 
-  find(menuPanel, '.nav-toggle').forEach(function (btn) {
+  find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
     var li = btn.parentElement
     btn.addEventListener('click', toggleActive.bind(li))
     var navItemSpan = findNextElement(btn, '.nav-text')
@@ -156,5 +154,4 @@
     var el = from.nextElementSibling
     return el && selector ? el[el.matches ? 'matches' : 'msMatchesSelector'](selector) && el : el
   }
- } catch(err) { console.log(err); }
 })()

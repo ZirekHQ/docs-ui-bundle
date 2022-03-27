@@ -129,6 +129,13 @@ page:
       - content: Importing and Exporting
         url: '#'
         urlType: fragment
+      - content: Some super long SubCategory title than should span 2 lines
+        url: '/xyz/5.2/category.html'
+        urlType: internal
+        items:
+        - content: SubCategory item
+          url: '/xyz/5.2/category/item.html'
+          urlType: internal
       - content: Some Code
         url: '/xyz/5.2/index.html#some-code'
         urlType: internal

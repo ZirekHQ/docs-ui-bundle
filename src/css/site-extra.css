@@ -35,3 +35,31 @@
  content: "";
 }
 
+.nav-panel-explore .context {
+  font-size: 0.75rem;
+}
+
+.nav-container, .nav-menu {
+  background-color: #dedede;
+}
+
+.nav-panel-menu {
+  overflow-y: auto;
+}
+
+.toolbar {
+  background-color:#eee;
+  font-size:.75rem;
+}
+
+.page-languages {
+  display: block;
+}
+
+.edit-this-page {
+  display: block;
+}
+  
+.is-current-page > .nav-link, .is-current-page > .nav-text {
+  font-weight: 700;
+}

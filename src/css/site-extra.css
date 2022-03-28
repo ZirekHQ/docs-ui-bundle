@@ -43,6 +43,10 @@
   background-color: #dedede;
 }
 
+.nav-panel-explore:not(:first-child) {
+  max-height: 100%;
+}
+
 .nav-panel-menu {
   overflow-y: auto;
 }

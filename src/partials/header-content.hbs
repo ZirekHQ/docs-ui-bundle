@@ -4,6 +4,13 @@
       <a class="navbar-item" href="{{or site.url (or siteRootUrl siteRootPath)}}">
         <img src="{{uiRootPath}}/img/docs_logo.png" style="height:40px">
       </a>
+      {{#if env.SITE_SEARCH_PROVIDER}}
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs"{{#if page.home}} autofocus{{/if}}>
+        </div>
+      </div>
+      {{/if}}
       <!-- We don't have anything in the menu, but the burger still appears
            on mobile devices. So let's remove it. -->
       <!--<button class="navbar-burger" data-target="topbar-nav">

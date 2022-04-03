@@ -74,3 +74,7 @@
 .is-current-page > .nav-link, .is-current-page > .nav-text {
   font-weight: 700;
 }
+
+.toolbar a .fas:hover {
+  color: #0275d8;
+}

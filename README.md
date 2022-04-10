@@ -1,6 +1,17 @@
 # fedora-docs-ui
 
-Sources of a UI for the new Antora Docs site
+Sources of Antora UI for the Fedora Docs site
+
+## How to use it with Antora
+
+Add the following configuration in your Antora playbook:
+
+```yaml
+ui:
+  bundle:
+    url: https://gitlab.com/fedora/docs/docs-website/ui-bundle/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+```
 
 ## Build and preview the UI
 
@@ -11,8 +22,8 @@ These instructions work on Fedora, using podman.
 Go to your Antora UI project directory. For example:
 
 ```
-$ git clone https://pagure.io/fedora-docs/fedora-docs-ui.git
-$ cd fedora-docs-ui
+$ git clone https://gitlab.com/fedora/docs/docs-website/ui-bundle.git
+$ cd ui-bundle
 ```
 
 Build the builder image:
@@ -26,17 +37,15 @@ $ podman build . -t fedora-docs-ui
 Build a live preview:
 
 ```
-$ podman run --rm -p 5252:5252 fedora-docs-ui preview
+$ podman run --rm -v $(pwd):/antora:Z -p 5252:5252 fedora-docs-ui preview
 ```
 
-Preview it on [localhost:5252](http://localhost:5252).
+Preview it on [localhost:5252](http://localhost:5252).  
 
-If you want to use your UI on an Antora docs site, you need to build a bundle using the following command:
+If you want to use this UI on your own Antora docs site, you'll need to build a bundle using the following command:
 
 ```
-$ podman run --rm -v ./build:/antora/build:Z fedora-docs-ui bundle:pack
+$ podman run --rm -v $(pwd):/antora:Z fedora-docs-ui bundle
 ```
 
-The newly generated bundle will be available in the `build` directory
-
-See the [Antora UI docs](https://docs.antora.org/antora-ui-default/build-preview-ui/) for more info.
+The generated archive can be found in `build/ui-bundle.zip`.

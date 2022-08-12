@@ -53,5 +53,9 @@
     "typeface-roboto-mono": "0.0.75",
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~3.0"
+  },
+  "dependencies": {
+    "datatables.net-dt": "^1.12.1",
+    "jquery": "^3.6.0"
   }
 }

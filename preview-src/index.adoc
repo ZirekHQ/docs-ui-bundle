@@ -365,6 +365,30 @@ The fog comes
 on little cat feet.
 ____
 
+== DataTables
+
+=== searchable
+
+[.datatable.dt-search]
+[%header,format=csv]
+.Statistics per component
+|===
+include::examples/es.csv[]
+|===
+
+=== stylized
+
+[.datatable.display%data-page-length="25"]
+|===
+|colA | colB | colC | colD
+
+| yyy | 123 | zzz | 28%
+| bbb | 242 | aaa | 42%
+| ddd | 8874 | yyy | 99%
+| ccc | 9 | ttt | 2%
+| aaa | 987 | www | 18%
+|===
+
 == Fin
 
 That's all, folks!

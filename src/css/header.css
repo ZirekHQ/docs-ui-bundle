@@ -46,9 +46,20 @@ body {
 }
 
 .navbar-brand .navbar-item.search {
+  /* flex: auto; */
+  justify-content: flex-end;
+  padding-left: 0;
+}
+
+.navbar-brand .navbar-right.link {
   flex: auto;
   justify-content: flex-end;
 }
+
+.navbar-brand .navbar-right.link a {
+  color: inherit;
+}
+
 
 #search-input {
   color: #333;
@@ -164,6 +175,11 @@ body {
   .navbar-brand .navbar-item.search {
     padding-left: 0;
     padding-right: 0;
+    flex: auto;
+  }
+
+  .navbar-brand .navbar-right.link {
+    display: none;
   }
 }
 

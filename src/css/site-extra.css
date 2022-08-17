@@ -78,3 +78,9 @@
 .toolbar a .fas:hover {
   color: #0275d8;
 }
+
+.black-border img {
+  border-style: solid;
+  border-color: black;
+  border-radius: 0.2rem;
+}

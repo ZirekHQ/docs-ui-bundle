@@ -3,7 +3,10 @@
 module.exports = (editUrl, options) => {
   var ret = ''
   if (!editUrl) return ret
-  let howtos = options.data.root.site.keys.howtos
+  let howtos = null
+  if (options.data.root.site.keys) {
+    howtos = options.data.root.site.keys.howtos
+  }
   if (!howtos) return ret
   howtos = JSON.parse(howtos)
 

@@ -4,7 +4,12 @@
 {{! OpenGraphProtocol }}
 <meta property="og:type" content="website">
 {{#if site.title}}<meta property="og:site_name" content="{{site.title}}">{{/if}}
+{{#if page.versions}}
+<meta property="og:title" content="[{{page.componentVersion.displayVersion}}] {{{detag (or page.title 'Untitled')}}}">
+{{else}}
 <meta property="og:title" content="{{{detag (or page.title 'Untitled')}}}">
+{{/if}}
+
 {{#if page.description}}
 <meta property="og:description" content="{{page.description}}">
 {{else}}

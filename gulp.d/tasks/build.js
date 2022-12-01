@@ -15,6 +15,7 @@ const postcssCalc = require('postcss-calc')
 const postcssImport = require('postcss-import')
 const postcssUrl = require('postcss-url')
 const postcssVar = require('postcss-custom-properties')
+const tailwindcss = require('tailwindcss')
 const { Transform } = require('stream')
 const map = (transform) => new Transform({ objectMode: true, transform })
 const through = () => map((file, enc, next) => next(null, file))
@@ -26,6 +27,7 @@ module.exports = (src, dest, preview) => () => {
   const sourcemaps = preview || process.env.SOURCEMAPS === 'true'
   const postcssPlugins = [
     postcssImport,
+    tailwindcss,
     (css, { messages, opts: { file } }) =>
       Promise.all(
         messages
@@ -37,7 +39,7 @@ module.exports = (src, dest, preview) => () => {
       }),
     postcssUrl([
       {
-        filter: '**/~typeface-*/files/*',
+        filter: new RegExp('^src/css/[~][^/]*(?:font|face)[^/]*/.*/files/.+[.](?:ttf|woff2?)$'),
         url: (asset) => {
           const relpath = asset.pathname.substr(1)
           const abspath = require.resolve(relpath)
@@ -100,7 +102,7 @@ module.exports = (src, dest, preview) => () => {
     // NOTE use this statement to bundle a JavaScript library that cannot be browserified, like jQuery
     //vfs.src(require.resolve('<package-name-or-require-path>'), opts).pipe(concat('js/vendor/<library-name>.js')),
     vfs
-      .src(['css/site.css', 'css/vendor/*.css'], { ...opts, sourcemaps })
+      .src(['css/site.css', 'css/search.css', 'css/vendor/*.css'], { ...opts, sourcemaps })
       .pipe(postcss((file) => ({ plugins: postcssPlugins, options: { file } }))),
     vfs.src('font/*.{ttf,woff*(2)}', opts),
     vfs.src('img/**/*.{gif,ico,jpg,png,svg}', opts).pipe(

@@ -1,38 +1,29 @@
 <header class="header" role="banner">
-  <nav class="navbar" style="">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="{{or site.url (or siteRootUrl siteRootPath)}}">
-        <img src="{{uiRootPath}}/img/docs_logo.png" style="height:40px">
-      </a>
-      <div class="navbar-item navbar-right link hide-for-print">
-      {{#if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
-      {{#howtos page.editUrl}}
-        <a href="{{{relativize link}}}" class="">{{title}}</a>
-      {{/howtos}}
-      {{/if}}
-      </div>
-
-      {{#if env.SITE_SEARCH_PROVIDER}}
-      <div class="navbar-item search hide-for-print">
-        <div id="search-field" class="field has-filter">
-          <input id="search-input" type="text" placeholder="Search the docs"{{#if page.home}} autofocus{{/if}}>
-	  <label class="filter checkbox">
-            <input type="checkbox" data-facet-filter="component:{{page.component.name}}"> In this project
-          </label>
+  <nav class="fixed z-50 top-0 w-full bg-gradient-to-l from-fp-blue to-fp-blue-light dark:bg-none dark:bg-fp-blue-dark" style="">
+    <div class="mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-14 items-center justify-between">
+        <div
+          class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+        >
+          <div class="flex flex-shrink-0 items-center">
+            <a href="{{or site.url (or siteRootUrl siteRootPath)}}">
+              <img class="h-6 z-10 w-auto" src="{{uiRootPath}}/img/docs_logo_white.png">
+            </a>
+          </div>
+	  {{#if (not noSearch)}}
+	  <div class="hidden sm:ml-auto sm:block">
+            <div class="flex space-x-4">
+              <div id="search-field" class="relative inline-flex cursor-pointer items-center rounded px-4 text-xs text-gray-500 dark:text-gray-200">
+                <svg class="absolute left-6 fill-gray-400 dark:fill-gray-400 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg>
+                <input id="search-input" class="pl-6 pr-28 h-8 w-64 rounded-xl dark:bg-black" type="text" placeholder="Search Docs">
+                <label class="ml-2 absolute right-6 filter checkbox border-l border-gray-500 pl-2">
+		 <input type="checkbox" class="appearance-none h-3 w-3 border border-gray-500 rounded bg-white dark:bg-black checked:bg-fp-blue-light checked:border-fp-blue-light dark:checked:bg-fp-blue dark:checked:border-fp-blue focus:outline-none transition duration-200 cursor-pointer my-0.5 mr-1 float-left" data-facet-filter="component:{{page.component.name}}"> In this section
+                </label>
+              </div>
+            </div>
+          </div>
+	  {{/if}}
         </div>
-      </div>
-      {{/if}}
-      <!-- We don't have anything in the menu, but the burger still appears
-           on mobile devices. So let's remove it. -->
-      <!--<button class="navbar-burger" data-target="topbar-nav">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>-->
-    </div>
-    <div id="topbar-nav" class="navbar-menu">
-      <div class="navbar-end">
-
       </div>
     </div>
   </nav>

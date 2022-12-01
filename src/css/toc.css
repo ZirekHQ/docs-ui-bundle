@@ -1,5 +1,5 @@
 .toc-menu {
-  color: var(--toc-font-color);
+  @apply text-fp-gray-dark dark:text-fp-gray-light;
 }
 
 .toc.sidebar .toc-menu {
@@ -9,9 +9,8 @@
 }
 
 .toc .toc-menu h3 {
-  color: var(--toc-heading-font-color);
+  @apply text-black dark:text-white font-bold;
   font-size: calc(16 / var(--rem-base) * 1rem);
-  font-weight: var(--body-font-weight-bold);
   line-height: 1.3;
   margin: 0 -0.5px;
   padding-bottom: 0.25rem;
@@ -67,8 +66,8 @@
 }
 
 .toc .toc-menu a {
+  @apply border-l-2 border-fp-gray-lighter dark:border-gray-800;
   color: inherit;
-  border-left: 2px solid var(--toc-border-color);
   display: inline-block;
   padding: 0.25rem 0 0.25rem 0.5rem;
   text-decoration: none;
@@ -85,7 +84,7 @@
 
 .toc .toc-menu a.is-active {
   border-left-color: var(--link-font-color);
-  color: var(--doc-font-color);
+  @apply text-fp-blue-dark dark:text-fp-blue-light;
 }
 
 .sidebar.toc .toc-menu a:focus {

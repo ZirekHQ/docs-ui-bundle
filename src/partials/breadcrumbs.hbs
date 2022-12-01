@@ -3,11 +3,11 @@
   <ul>
     {{#with page.componentVersion}}
     {{#if (and ./title (ne ./title @root.page.breadcrumbs.0.content))}}
-    <li><a href="{{{relativize ./url}}}">{{{./title}}}</a></li>
+    <li class="after:text-gray-800 dark:after:text-gray-400"><a href="{{{relativize ./url}}}">{{{./title}}}</a></li>
     {{/if}}
     {{/with}}
     {{#each page.breadcrumbs}}
-    <li>
+    <li class="after:text-gray-800 dark:after:text-gray-400">
     {{~#if (and ./url (eq ./urlType 'internal'))~}}
     <a href="{{{relativize ./url}}}">{{{./content}}}</a>
     {{~else~}}

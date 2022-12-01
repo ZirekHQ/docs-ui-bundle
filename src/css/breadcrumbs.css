@@ -31,7 +31,6 @@ a + .crumbs {
 
 .crumbs li::after {
   content: "/";
-  color: #333;
   padding: 0 0.5rem;
 }
 

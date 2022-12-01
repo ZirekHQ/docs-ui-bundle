@@ -20,22 +20,23 @@
   font-weight: 600;
 }
 
-.doc h1,
+.doc h1 {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
 .doc h2,
 .doc h3,
 .doc h4,
 .doc h5,
 .doc h6 {
-  color: #191919;
   font-weight: 600;
   line-height: 1.3;
   margin: 1rem 0 0;
 }
 
 article.doc h1 {
-  font-family: "Open sans", Helvetica, Arial;
   font-weight: 600;
-  color: #294172!important;
 }
 
 ul.nav-list {
@@ -97,10 +98,8 @@ ul.nav-list {
 /* what about td/th code? */
 .doc p code {
   font-size: 0.9em;
-  background-color: #fafafa;
   padding: 0.075rem 0.25rem 0.125rem;
   border-radius: 0.2rem;
-  color: #d14;
   /* font-weight: 300; */
 }
 
@@ -196,71 +195,87 @@ ul.nav-list {
 }
 
 .doc .admonitionblock > table {
-  border-collapse: collapse;
+  border-collapse: separate;
   table-layout: fixed;
   position: relative;
   width: 100%;
 }
 
 .doc .admonitionblock td.content {
-  padding: 1rem 1rem 0.75rem;
-  background-color: #fafafa;
+  padding: 3rem 1rem 0.75rem;
   width: 100%;
 }
 
 .doc .admonitionblock .icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 0.75rem;
+  font-size: 4.5rem;
   padding: 0 0.5rem;
-  height: 1.25rem;
+  height: 1.5rem;
   line-height: 1;
   font-weight: 500;
-  text-transform: uppercase;
-  border-radius: 0.45rem;
-  color: #fff;
-  transform: translate(-0.5rem, -50%);
+  transform: translate(0.8rem, -50%);
 }
 
-.doc .admonitionblock.caution .icon {
-  background-color: #a0439c;
+.doc .admonitionblock .icon .fa {
+  @apply font-display font-bold text-xl;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  padding-left: 42px;
 }
 
-.doc .admonitionblock.important .icon {
-  background-color: #d32f2f;
+.doc .admonitionblock.caution .icon-caution {
+  background-image: url(../img/icon-caution.png);
+  color: #e59728;
+  background-position-x: 3px;
 }
 
-.doc .admonitionblock.note .icon {
-  background-color: #217ee7;
+.doc .admonitionblock.important .icon-important {
+  background-image: url(../img/icon-important.png);
+  color: #a07cbc;
+  background-position-x: 4px;
 }
 
-.doc .admonitionblock.tip .icon {
-  background-color: #41af46;
+.doc .admonitionblock.note .icon-note {
+  background-image: url(../img/icon-note.png);
+  color: #51a2da;
+  background-position-x: 3px;
 }
 
-.doc .admonitionblock.warning .icon {
-  background-color: #e18114;
+.doc .admonitionblock.tip .icon-tip {
+  background-image: url(../img/icon-tip.png);
+  color: #79db32;
+  background-position-x: 8px;
+}
+
+.doc .admonitionblock.warning .icon-warning {
+  background-image: url(../img/icon-warning.png);
+  color: #db3279;
 }
 
 .doc .admonitionblock.caution td.content {
-  border: 1px solid #a0439c;
+  border-left: 8px solid #e59728;
+  border-radius: 8px;
 }
 
 .doc .admonitionblock.important td.content {
-  border: 1px solid #d32f2f;
+  border-left: 8px solid #a07cbc;
+  border-radius: 8px;
 }
 
 .doc .admonitionblock.note td.content {
-  border: 1px solid #217ee7;
+  border-left: 8px solid #51a2da;
+  border-radius: 8px;
 }
 
 .doc .admonitionblock.tip td.content {
-  border: 1px solid #41af46;
+  border-left: 8px solid #79db32;
+  border-radius: 8px;
 }
 
 .doc .admonitionblock.warning td.content {
-  border: 1px solid #e18114;
+  border: 1px solid #db3279;
+  border-left-width: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
 }
 
 .doc .admonitionblock .icon i {
@@ -299,7 +314,6 @@ ul.nav-list {
 
 .doc > h1 {
   font-size: 2rem;
-  margin: 2rem 0 1.5rem;
 }
 
 #preamble + .sect1,
@@ -313,8 +327,7 @@ ul.nav-list {
   margin-right: -1rem;
   padding: 0.4rem 1.5rem 0.1rem;
   font-size: 36px;
-  font-weight: 600;
-  font-family: "Open sans", Helvetica, Arial;
+  font-weight: 700;
 }
 
 article.doc h2 {
@@ -464,8 +477,6 @@ article.doc h2 {
 .doc .literalblock .title,
 .doc .listingblock .title,
 .doc .openblock .title {
-  /* color: #4a4a4a; */
-  color: #191919;
   font-size: 0.925rem;
   font-style: italic;
   letter-spacing: -0.005em;
@@ -478,7 +489,6 @@ article.doc h2 {
 
 /* Other possible colors #248232 (dark green) #2ba84a (brighter green), #f7ef99 (soft yellow), #f78e69 (orangey-grayish) */
 .doc .exampleblock > .content {
-  background-color: #fff;
   box-shadow: inset 0 0 1.75px #248232;
   padding: 0.75rem;
 }
@@ -488,12 +498,12 @@ article.doc h2 {
 }
 
 .doc .sidebarblock {
-  background-color: #ebebeb;
+  @apply bg-fp-gray-lighter dark:bg-gray-900;
   padding: 0.75rem 1.5rem;
 }
 
 .doc .sidebarblock > .content > .title {
-  color: #191919;
+  @apply text-gray-800 dark:text-gray-200;
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.3;
@@ -512,8 +522,6 @@ article.doc h2 {
 
 .doc pre:not(.highlight),
 .doc pre.highlight code {
-  background-color: #fafafa;
-  box-shadow: inset 0 0 1.75px #ddd;
   display: block;
   overflow-x: auto;
   padding: 0.75rem;
@@ -527,12 +535,10 @@ article.doc h2 {
 .doc .listingblock code[data-lang]::before {
   content: attr(data-lang);
   display: none;
-  color: #8e8e8e;
   font-size: 0.75em;
   font-weight: 500;
   letter-spacing: 0.075em;
   line-height: 1;
-  text-transform: uppercase;
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -543,7 +549,7 @@ article.doc h2 {
 }
 
 .doc .dlist dt {
-  color: #4a4a4a;
+  @apply text-fp-gray-darkest dark:text-fp-gray-lightest;
   font-style: italic;
 }
 
@@ -599,6 +605,7 @@ b.button::after {
 }
 
 kbd {
+  color: black;
   display: inline-block;
   font-size: 0.7rem;
   background-color: #fafafa;

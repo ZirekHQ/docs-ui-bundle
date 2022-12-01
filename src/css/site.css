@@ -1,5 +1,6 @@
 @import "typeface-roboto.css";
 @import "typeface-roboto-mono.css";
+@import "montserrat.css";
 @import "vars.css";
 @import "base.css";
 @import "body.css";
@@ -18,3 +19,5 @@
 @import "contributing.css";
 @import "jquery.dataTables.css";
 @import "site-extra.css";
+@import "tailwind.css";
+@import "fonts.css";

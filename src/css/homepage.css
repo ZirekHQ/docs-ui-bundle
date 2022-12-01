@@ -38,7 +38,6 @@ div.homepage-section a.homepage-link {
 }
 
 .homepage-page {
-    margin-top: 2.5em;
 }
 
 div.homepage-section a.homepage-link:hover {
@@ -81,10 +80,7 @@ div.home-page div.container-header h2{
 .homepage-page div h2 {
     margin: 1em -1rem .3em;
     padding: .8rem 1.5rem!important;
-    font-size: 34px!important;
-    color: #294172!important;
-    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#eee),to(#ddd));
-    background-image: linear-gradient(180deg,#eee,#ddd);
+    @apply text-fp-blue-light text-center font-bold text-xl;
     border-bottom: none!important;
 }
 

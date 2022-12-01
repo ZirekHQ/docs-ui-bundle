@@ -46,9 +46,6 @@
   font-size: 0.75rem;
 }
 
-.nav-container, .nav-menu {
-  background-color: #dedede;
-}
 
 .nav-panel-explore:not(:first-child) {
   max-height: 100%;
@@ -59,7 +56,6 @@
 }
 
 .toolbar {
-  background-color:#eee;
   font-size:.75rem;
 }
 

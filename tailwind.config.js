@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/layouts/*.hbs", "./src/partials/*.hbs"],
-  darkMode: 'media',
+  content: ["./src/layouts/*.hbs", "./src/partials/*.hbs", "./src/js/*.js"],
+  darkMode: 'class',
   theme: {
     fontFamily: {
       display: ["Montserrat", "ui-sans-serif", "system-ui", "sans-serif"],

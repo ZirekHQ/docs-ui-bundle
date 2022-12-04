@@ -16,7 +16,9 @@ module.exports = (editUrl, type) => {
     }
   }
   if (editUrl.includes('://gitlab.com/')) {
-    if (type === 'issue') return editUrl.replace(/\/edit\/(\w+)\/(.*)$/, '/issues/new?issue[title]=[$1] Doc issue in file $2')
+    if (type === 'issue') {
+      return editUrl.replace(/\/edit\/(\w+)\/(.*)$/, '/issues/new?issue[title]=[$1] Doc issue in file $2')
+    }
     if (type === 'history') return editUrl.replace(/\/edit\//, '/commits/')
   }
 

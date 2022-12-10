@@ -80,3 +80,15 @@
   border-color: black;
   border-radius: 0.2rem;
 }
+
+.nav-menu h3.title {
+  line-height: 1.35;
+}
+
+.nav-panel-explore .context {
+  @apply dark:text-gray-300;
+}
+
+nav a:hover {
+  text-decoration: none;
+}

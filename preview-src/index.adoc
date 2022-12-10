@@ -8,7 +8,7 @@ Author Name; Another Author Name
 :!example-caption:
 :!table-caption:
 :page-pagination:
-:page-layout: without_menu
+:page-layout: with_menu
 
 image:multirepo-ssg.svg[Multirepo SSG,200,150,float=right]
 

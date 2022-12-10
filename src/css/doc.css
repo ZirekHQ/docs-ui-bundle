@@ -84,11 +84,11 @@ ul.nav-list {
 
 .doc a,
 .doc a:visited {
-  color: #1565c0;
+  @apply text-fp-blue dark:text-fp-blue-light;
 }
 
 .doc a:hover {
-  color: #104d92;
+  @apply text-fp-blue-dark dark:text-fp-blue;
 }
 
 .doc i.fa {

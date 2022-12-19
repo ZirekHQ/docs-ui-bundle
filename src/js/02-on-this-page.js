@@ -3,7 +3,9 @@
 
   var sidebar = document.querySelector('aside.toc.sidebar')
   if (!sidebar) return
-  if (document.querySelector('body.-toc')) return sidebar.parentNode.removeChild(sidebar)
+  var menu = sidebar.querySelector('.toc-menu')
+  if (!menu) (menu = document.createElement('div')).className = 'toc-menu'
+  if (document.querySelector('body.-toc')) return menu.parentNode.removeChild(menu)
   var levels = parseInt(sidebar.dataset.levels || 2, 10)
   if (levels < 0) return
 
@@ -21,7 +23,7 @@
     headingsSelector.push(headingSelector.join('>'))
   }
   var headings = find(headingsSelector.join(','), article.parentNode)
-  if (!headings.length) return sidebar.parentNode.removeChild(sidebar)
+  if (!headings.length) return menu.parentNode.removeChild(menu)
 
   var lastActiveFragment
   var links = {}
@@ -35,9 +37,6 @@
     accum.appendChild(listItem)
     return accum
   }, document.createElement('ul'))
-
-  var menu = sidebar.querySelector('.toc-menu')
-  if (!menu) (menu = document.createElement('div')).className = 'toc-menu'
 
   var title = document.createElement('h3')
   title.textContent = sidebar.dataset.title || 'Contents'

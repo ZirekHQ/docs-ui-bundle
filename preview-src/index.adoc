@@ -1,6 +1,5 @@
 = Hardware and Software Requirements
 Author Name; Another Author Name
-:author: First Author
 :revdate: 2022-11-25
 :revnumber: F37
 :idprefix:
@@ -9,6 +8,8 @@ Author Name; Another Author Name
 :!table-caption:
 :page-pagination:
 :page-layout: with_menu
+:category: test-category
+:tags: tag1, tag with space, superlongtag, yet another tag
 
 image:multirepo-ssg.svg[Multirepo SSG,200,150,float=right]
 

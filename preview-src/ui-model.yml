@@ -139,3 +139,80 @@ page:
       - content: Some Code
         url: '/xyz/5.2/index.html#some-code'
         urlType: internal
+    - content: Category
+      url: 'category.html'
+      urlType: internal
+  attributes:
+    category:
+      category-pages:
+        - title: Pellentesque
+          pub:
+            url: '#'
+          asciidoc:
+            attributes:
+              description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a pellentesque orci. Pellentesque finibus, erat ut dignissim semper, libero augue viverra felis, in condimentum dolor diam a quam. 
+        - title: laoreet
+          pub:
+            url: '#'
+          asciidoc:
+            attributes:
+              description: Nulla eu dui lorem. Aliquam quis venenatis libero, quis dictum mauris. Duis non ex risus. Proin leo lacus, bibendum eget cursus in, iaculis at enim.
+    tag:
+      tag-pages:
+        - title: Pellentesque
+          pub:
+            url: '#'
+          asciidoc:
+            attributes:
+              description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a pellentesque orci. Pellentesque finibus, erat ut dignissim semper, libero augue viverra felis, in condimentum dolor diam a quam. 
+        - title: laoreet
+          pub:
+            url: '#'
+          asciidoc:
+            attributes:
+              description: Nulla eu dui lorem. Aliquam quis venenatis libero, quis dictum mauris. Duis non ex risus. Proin leo lacus, bibendum eget cursus in, iaculis at enim.
+asciidoc:
+  attributes:
+catalog:
+- title: tag1
+  src:
+    component: quick-docs
+  asciidoc:
+    attributes:
+      page-layout: category
+      page-tag: tag1
+  pub:
+    url: '#'
+- title: tag with space
+  src:
+    component: quick-docs
+  asciidoc:
+    attributes:
+      page-layout: category
+      page-tag: tag with space
+  pub:
+    url: '#'
+- src:
+    component: quick-docs
+  asciidoc:
+    attributes:
+      page-layout: category
+      page-tag: superlongtag
+  pub:
+    url: '#'
+- src:
+    component: quick-docs
+  asciidoc:
+    attributes:
+      page-layout: category
+      page-tag: yet another tag
+  pub:
+    url: '#'
+- src:
+    component: quick-docs
+  asciidoc:
+    attributes:
+      page-layout: category
+      page-category: test-category
+  pub:
+    url: '#'

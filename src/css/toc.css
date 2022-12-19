@@ -2,10 +2,13 @@
   @apply text-fp-gray-dark dark:text-fp-gray-light;
 }
 
-.toc.sidebar .toc-menu {
-  margin-right: 0.75rem;
+.toc-content {
   position: sticky;
   top: var(--toc-top);
+}
+
+.toc.sidebar .toc-menu {
+  margin-right: 0.75rem;
 }
 
 .toc .toc-menu h3 {

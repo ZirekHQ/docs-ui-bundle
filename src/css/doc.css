@@ -43,9 +43,16 @@ ul.nav-list {
   font-family: "Open sans", Helvetica, Arial;
 }
 
+
 .doc h3 {
   font-family: "Open sans", Helvetica, Arial;
   font-size: 24px;
+}
+
+/* Add an H4 heading to fix issues with H4 content displaying same size as H2 */
+.doc h4 {
+  font-family: "Open sans", Helvetica, Arial;
+  font-size: 20px;
 }
 
 .doc h1 > a.anchor,

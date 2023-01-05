@@ -288,7 +288,8 @@ ul.nav-list {
 .doc .admonitionblock .icon i {
   display: inline-flex;
   align-items: center;
-  height: 100%;
+  /* height: 100%; */
+  /* height value causing issues in Chrome, pushing admonition icon and text too high and off center */
 }
 
 .doc .admonitionblock .icon i::after {

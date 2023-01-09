@@ -354,6 +354,12 @@ article.doc h2 {
   hyphens: auto;
 }
 
+.doc .content pre {
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
 /*
 .doc .ulist .paragraph,
 .doc .olist .paragraph {

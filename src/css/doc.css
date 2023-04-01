@@ -122,6 +122,7 @@ ul.nav-list {
 .doc .dlist,
 .doc .olist,
 .doc .ulist,
+.doc .hdlist,
 .doc .exampleblock,
 .doc .imageblock,
 .doc .listingblock,
@@ -602,6 +603,24 @@ article.doc h2 {
 .doc .colist > table tr > td:first-of-type {
   padding: 0 0.75em;
   line-height: 1;
+}
+
+.doc td.hdlist1,.doc td.hdlist2 {
+  padding: .5rem 0 0;
+  vertical-align: top
+}
+
+.doc tr:first-child>.hdlist1,.doc tr:first-child>.hdlist2 {
+  padding-top: 0
+}
+
+.doc td.hdlist1 {
+  font-weight: 600;
+  padding-right: .25rem
+}
+
+.doc td.hdlist2 {
+  padding-left: .25rem
 }
 
 b.button {

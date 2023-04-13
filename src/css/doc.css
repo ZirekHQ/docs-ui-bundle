@@ -653,25 +653,102 @@ article.doc h2 {
   padding: 0.75rem;
 }
 
-/* NOTE assume pre.highlight contains code[data-lang] */
-.doc pre.highlight {
+.doc .listingblock > .content {
   position: relative;
 }
 
-.doc .listingblock code[data-lang]::before {
-  content: attr(data-lang);
-  display: none;
-  font-size: 0.75em;
-  font-weight: 500;
-  letter-spacing: 0.075em;
-  line-height: 1;
+.doc .source-toolbox {
+  display: flex;
+  visibility: hidden;
   position: absolute;
-  top: 0.5rem;
+  top: 0.25rem;
   right: 0.5rem;
+  font-size: 0.725rem;
+  line-height: 1;
+  white-space: nowrap;
+  z-index: 1;
 }
 
-.doc .listingblock:hover code[data-lang]::before {
-  display: block;
+.doc .listingblock:hover .source-toolbox {
+  visibility: visible;
+}
+
+/*
+.doc .source-toolbox .source-lang {
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+}
+*/
+
+.doc .source-toolbox > :not(:last-child)::after {
+  content: "|";
+  letter-spacing: 0;
+  padding: 0 1ch;
+}
+
+.doc .source-toolbox .copy-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  width: 1em;
+  height: 1em;
+}
+
+.doc .source-toolbox .copy-icon {
+  flex: none;
+  width: inherit;
+  height: inherit;
+}
+
+.doc .source-toolbox img.copy-icon {
+  filter: invert(50.2%);
+}
+
+.doc .source-toolbox svg.copy-icon {
+  fill: currentColor;
+}
+
+.doc .source-toolbox .copy-toast {
+  flex: none;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 1em;
+  @apply bg-fp-gray-darkest dark:bg-fp-gray-lighter;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  @apply text-white dark:text-black;
+  cursor: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.5s;
+}
+
+.doc .source-toolbox .copy-toast::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 1em;
+  height: 1em;
+  border: 0.55em solid transparent;
+  @apply border-l-fp-gray-darkest dark:border-l-fp-gray-lighter;
+  transform: rotate(-90deg) translateX(50%) translateY(50%);
+  transform-origin: left;
+}
+
+.doc .source-toolbox .copy-button.clicked .copy-toast {
+  opacity: 1;
+  transition: none;
+}
+
+.doc .language-console .hljs-meta {
+  user-select: none;
 }
 
 .doc .dlist dt {

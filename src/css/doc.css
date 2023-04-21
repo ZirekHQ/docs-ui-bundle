@@ -1,8 +1,8 @@
 .doc {
+  @apply text-gray-900 dark:text-gray-300;
   margin: 0 auto;
   max-width: 40rem;
   padding: 0 1rem 4rem;
-  color: #333;
 }
 
 @media (min-width: 1024px) {
@@ -147,8 +147,26 @@ ul.nav-list {
 }
 
 .doc table.tableblock {
+  font-size: 0.8rem;
+}
+
+.doc .tablecontainer,
+.doc .tablecontainer + *,
+.doc :not(.tablecontainer) > table.tableblock,
+.doc :not(.tablecontainer) > table.tableblock + * {
+  margin-top: 1.5rem;
+}
+
+.doc p.tableblock + p.tableblock {
+  margin-top: 0.5rem;
+}
+
+.doc td.tableblock > .content > :first-child {
+  margin-top: 0;
+}
+
+.doc table.tableblock {
   border-collapse: collapse;
-  font-size: 0.8em;
   margin: 2rem 0;
   /* enable table-layout: fixed if you want the table width to be enforced strictly */
   /* alternative is to wrap table in div and set overflow-x: auto on the wrapper */
@@ -165,13 +183,80 @@ ul.nav-list {
 }
 
 .doc table.tableblock th {
-  border-bottom: 2.5px solid #ddd;
+  @apply border-b-2 border-b-gray-300 dark:border-b-gray-700;
 }
 
 .doc table.tableblock td {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  @apply border-y border-y-gray-300 dark:border-y-gray-700;
 }
+
+/*
+.doc table.tableblock,
+.doc table.tableblock > * > tr > * {
+  @apply border-0 border-gray-100 dark:border-gray-100;
+}
+
+.doc table.grid-all > * > tr > * {
+  border-width: 1px;
+}
+
+.doc table.grid-cols > * > tr > * {
+  border-width: 0 1px;
+}
+
+.doc table.grid-rows > * > tr > * {
+  border-width: 1px 0;
+}
+
+.doc table.grid-all > thead th,
+.doc table.grid-rows > thead th {
+  border-bottom-width: 2.5px;
+}
+
+.doc table.frame-all {
+  border-width: 1px;
+}
+
+.doc table.frame-ends {
+  border-width: 1px 0;
+}
+
+.doc table.frame-sides {
+  border-width: 0 1px;
+}
+
+.doc table.frame-none > colgroup + * > :first-child > *,
+.doc table.frame-sides > colgroup + * > :first-child > * {
+  border-top-width: 0;
+}
+
+
+/* NOTE let the grid win in case of frame-none 
+.doc table.frame-sides > :last-child > :last-child > * {
+  border-bottom-width: 0;
+}
+
+.doc table.frame-none > * > tr > :first-child,
+.doc table.frame-ends > * > tr > :first-child {
+  border-left-width: 0;
+}
+
+.doc table.frame-none > * > tr > :last-child,
+.doc table.frame-ends > * > tr > :last-child {
+  border-right-width: 0;
+}
+
+.doc table.stripes-all > tbody > tr,
+.doc table.stripes-odd > tbody > tr:nth-of-type(odd),
+.doc table.stripes-even > tbody > tr:nth-of-type(even),
+.doc table.stripes-hover > tbody > tr:hover {
+  @apply bg-gray-900 dark:bg-gray-100;
+}
+
+.doc table.tableblock > tfoot {
+  @apply bg-fp-gray-lightest dark:bg-fp-gray-darkest;
+}
+*/
 
 .doc .halign-left {
   text-align: left;
@@ -194,8 +279,9 @@ ul.nav-list {
   font-size: 0.9rem;
 }
 
-.doc .admonitionblock td.content > :first-child {
-  margin: 0;
+.doc .admonitionblock td.content > :not(.title):first-child,
+.doc .admonitionblock td.content > .title + * {
+  margin-top: 0;
 }
 
 .doc .admonitionblock pre {
@@ -491,11 +577,35 @@ article.doc h2 {
 .doc .exampleblock .title,
 .doc .literalblock .title,
 .doc .listingblock .title,
-.doc .openblock .title {
-  font-size: 0.925rem;
+.doc .tableblock caption {
+  @apply text-gray-700 dark:text-gray-200;
+  font-size: 0.88rem;
   font-style: italic;
+  font-weight: 600;
   letter-spacing: -0.005em;
   padding-bottom: 0.075rem;
+}
+
+/*
+.doc .tableblock caption {
+  text-align: left;
+}
+*/
+
+.doc .tableblock caption {
+  font-style: normal;
+}
+
+.doc .ulist .title,
+.doc .olist .title {
+  font-style: italic;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.doc .imageblock .title {
+  margin-top: 0.5rem;
+  padding-bottom: 0;
 }
 
 .doc .admonitionblock .title + .paragraph {
@@ -522,6 +632,7 @@ article.doc h2 {
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.3;
+  margin-bottom: -0.3em;
   text-align: center;
 }
 
@@ -570,6 +681,48 @@ article.doc h2 {
 
 .doc .dlist dd {
   margin: 0 0 0.3rem 1.5rem;
+}
+
+.doc .dlist dd:last-of-type {
+  margin-bottom: 0;
+}
+
+.doc td.hdlist1,
+.doc td.hdlist2 {
+  padding: 0.5rem 0 0;
+  vertical-align: top;
+}
+
+.doc tr:first-child > .hdlist1,
+.doc tr:first-child > .hdlist2 {
+  padding-top: 0;
+}
+
+.doc td.hdlist1 {
+  font-weight: 600;
+  padding-right: 0.25rem;
+}
+
+.doc td.hdlist2 {
+  padding-left: 0.25rem;
+}
+
+
+.doc .colist {
+  font-size: 0.95rem;
+  margin: 0.25rem 0 -0.25rem;
+}
+
+.doc .colist > table > tr > :first-child,
+.doc .colist > table > tbody > tr > :first-child {
+  padding: 0.25em 0.5rem 0;
+  vertical-align: top;
+  line-height: 1;
+}
+
+.doc .colist > table > tr > :last-child,
+.doc .colist > table > tbody > tr > :last-child {
+  padding: 0.25rem 0;
 }
 
 .doc .conum[data-value] {
@@ -623,8 +776,13 @@ article.doc h2 {
   padding-left: .25rem
 }
 
-b.button {
-  white-space: nowrap;
+.doc hr {
+  @apply border-t-2 border-t-fp-gray-lighter dark:border-t-fp-gray-dark;
+  height: 0;
+}
+
+.doc b.button {
+  white-space: nowrap; /* effectively ignores hyphens setting */
 }
 
 b.button::before {
@@ -692,3 +850,71 @@ kbd,
 .imageblock.profile-picture img {
   border-radius: 8px;
 }
+
+/* Don't leave ocean of space between table and info text */
+.doc table.tableblock + div.dataTables_info {
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+}
+
+/* Dark mode styling for extra dataTables content */
+.doc .dataTables_filter,
+.doc .dataTables_info {
+  @apply text-fp-gray-dark dark:text-fp-gray-light;
+}
+
+/* Recreate jqueryui-datatables table row striping with dark mode */
+.doc table.dataTable.stripe > tbody > tr.odd > *,
+.doc table.dataTable.display > tbody > tr.odd > * {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.023)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.04)];
+}
+
+.doc table.dataTable.hover > tbody > tr:hover > *,
+.doc table.dataTable.display > tbody > tr:hover > * {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.035)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.06)];
+}
+
+.doc table.dataTable.order-column > tbody tr > .sorting_1,
+.doc table.dataTable.order-column > tbody tr > .sorting_2,
+.doc table.dataTable.order-column > tbody tr > .sorting_3,
+.doc table.dataTable.display > tbody tr > .sorting_1,
+.doc table.dataTable.display > tbody tr > .sorting_2,
+.doc table.dataTable.display > tbody tr > .sorting_3 {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.019)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.029)];
+}
+
+.doc table.dataTable.display > tbody > tr.odd > .sorting_1,
+.doc table.dataTable.order-column.stripe > tbody > tr.odd > .sorting_1 {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.054)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.08)];
+}
+
+.doc table.dataTable.display > tbody > tr.even > .sorting_1,
+.doc table.dataTable.order-column.stripe > tbody > tr.even > .sorting_1 {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.019)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.035)];
+}
+
+.doc table.dataTable.display > tbody > tr.even > .sorting_2,
+.doc table.dataTable.order-column.stripe > tbody > tr.even > .sorting_2 {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.011)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.02)];
+}
+
+.doc table.dataTable.display > tbody > tr.even > .sorting_3,
+.doc table.dataTable.order-column.stripe > tbody > tr.even > .sorting_3 {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.003)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.006)];
+}
+
+.doc table.dataTable.display tbody tr:hover > .sorting_1,
+.doc table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.082)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.1)];
+}
+
+table.dataTable.display tbody tr:hover > .sorting_2,
+table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.074)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.09)];
+}
+
+table.dataTable.display tbody tr:hover > .sorting_3,
+table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
+  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.062)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.075)];
+}
+

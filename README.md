@@ -49,3 +49,15 @@ $ podman run --rm -v $(pwd):/antora:Z fedora-docs-ui bundle
 ```
 
 The generated archive can be found in `build/ui-bundle.zip`.
+
+### License
+
+Most source code for the project is licensed under the
+Mozilla License 2.0 (MPL-2.0).
+A copy can be found in the `./LICENSE` file.
+
+The clipboard icon comes from the Adwaita icon theme,
+courtesy of the GNOME Project https://gnome.org/.
+License: Creative Commons Attribution Share-Alike 3.0 (CC-BY-SA-3.0).
+A copy can be found in `./LICENSES/CC-BY-SA-3.0.txt`.
+

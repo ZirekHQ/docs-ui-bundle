@@ -24,6 +24,7 @@
   outline: none;
   cursor: pointer;
   padding: 0.35rem 1.5rem 0.35rem 0.5rem;
+  margin: 0 2em 0 0;
   position: relative;
   z-index: 1;
 }

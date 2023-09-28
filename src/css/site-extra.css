@@ -95,3 +95,27 @@
 nav a:hover {
   text-decoration: none;
 }
+
+.tabpanel {
+  @apply dark:bg-fp-blue-darkest;
+}
+
+.tabpanel {
+  @apply dark:border-fp-gray-darkest dark:rounded-b;
+
+}
+
+.tabs.is-loading .tablist li:first-child::after,
+.tabs:not(.is-loading) .tablist li.is-selected::after {
+  @apply dark:bg-fp-blue-darkest dark:border-fp-gray-darkest;
+}
+
+
+.tabs.is-loading .tablist li:not(:first-child),
+.tabs:not(.is-loading) .tablist li:not(.is-selected) {
+  @apply dark:bg-gray-900 dark:border-fp-gray-darkest;
+}
+
+.tablist > ul li {
+  @apply dark:bg-fp-blue-darkest dark:border-fp-gray-darkest;
+}

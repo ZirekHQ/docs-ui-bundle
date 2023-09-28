@@ -172,7 +172,9 @@ page:
             attributes:
               description: Nulla eu dui lorem. Aliquam quis venenatis libero, quis dictum mauris. Duis non ex risus. Proin leo lacus, bibendum eget cursus in, iaculis at enim.
 asciidoc:
-  attributes:
+  attributes: {}
+  extensions:
+  - '@asciidoctor/tabs'
 catalog:
 - title: tag1
   src:

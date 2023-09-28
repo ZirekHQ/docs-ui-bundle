@@ -1,4 +1,4 @@
-FROM fedora:35
+FROM fedora:38
 
 RUN dnf -y module install nodejs:16/minimal && \
     dnf clean all

@@ -41,6 +41,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  overflow-y: scroll;
 }
 
 .page-languages:not(.is-active) .languages-menu {

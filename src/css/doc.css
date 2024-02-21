@@ -456,11 +456,15 @@ article.doc h2 {
 */
 
 #preamble .abstract blockquote {
-  background-color: #f0f0f0;
-  border-left: 5px solid #ddd;
-  color: #4a4a4a;
+  /* background-color: #f0f0f0; */
+  border-style: none solid;
+  border-width: 5px;
+  border-radius: 8px;
+  border-color: #aad0ee;
+  /* color: #4a4a4a; */
   font-size: 0.9em;
-  margin: 0;
+  font-weight: 600;
+  margin: 0rem;
   padding: 0.75em 1em;
 }
 
@@ -995,3 +999,12 @@ table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
   @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.062)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.075)];
 }
 
+/* footnotes */
+#footnotes {
+  margin: 2.0rem -1.0rem 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 1.0rem;
+  font-size: 0.9em;
+}

@@ -456,15 +456,11 @@ article.doc h2 {
 */
 
 #preamble .abstract blockquote {
-  /* background-color: #f0f0f0; */
-  border-style: none solid;
-  border-width: 5px;
-  border-radius: 8px;
-  border-color: #aad0ee;
-  /* color: #4a4a4a; */
-  font-size: 0.9em;
-  font-weight: 600;
-  margin: 0rem;
+  background: var(--abstract-background);
+  border-left: 5px solid var(--abstract-border-color);
+  color: var(--abstract-font-color);
+  font-size: calc(16 / var(--rem-base) * 1rem);
+  margin: 0;
   padding: 0.75em 1em;
 }
 

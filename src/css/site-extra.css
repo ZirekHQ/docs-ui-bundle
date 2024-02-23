@@ -119,3 +119,19 @@ nav a:hover {
 .tablist > ul li {
   @apply dark:bg-fp-blue-darkest dark:border-fp-gray-darkest;
 }
+
+#preamble .abstract blockquote {
+  /* @apply dark:bg-fp-blue-darkest text-black dark:text-white; */
+  background-color: inherit;
+  color: inherit;
+  border-style: none solid;
+  border-width: 5px;
+  border-radius: 8px;
+  border-color: #aad0ee; /* TO-DO: define as fp-blue... or var */
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.toc.embedded + #preamble .abstract blockquote {
+  margin-top: 1.5em;
+}

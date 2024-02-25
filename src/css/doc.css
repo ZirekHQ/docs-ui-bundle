@@ -394,13 +394,6 @@ ul.nav-list {
   display: block;
 }
 
-.doc .imageblock .title {
-  /* color: #4a4a4a; */
-  /* color: #191919; */
-  font-style: italic;
-  margin-top: 0.5rem;
-}
-
 .doc .imageblock img,
 .doc .paragraph .image img {
   height: auto;
@@ -575,14 +568,15 @@ article.doc h2 {
 
 .doc .admonitionblock .title,
 .doc .exampleblock .title,
+.doc .imageblock .title,
 .doc .literalblock .title,
 .doc .listingblock .title,
 .doc .tableblock caption {
-  @apply text-gray-700 dark:text-gray-200;
-  font-size: 0.88rem;
-  font-style: italic;
-  font-weight: 600;
-  letter-spacing: -0.005em;
+  color: var(--caption-font-color);
+  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-style: var(--caption-font-style);
+  font-weight: var(--caption-font-weight);
+  letter-spacing: -0.01em;
   padding-bottom: 0.075rem;
 }
 

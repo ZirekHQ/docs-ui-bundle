@@ -43,12 +43,18 @@
 }
 
 .nav-panel-explore .context {
+  @apply dark:text-gray-300;
   font-size: 0.75rem;
 }
 
-
 .nav-panel-explore:not(:first-child) {
   max-height: 100%;
+}
+
+/* Set back to 500, upstream is 600 */
+.nav-panel-explore .component .title,
+.nav-panel-explore .component .is-current a {
+   font-weight: 500; /* var(--body-font-weight-bold); */
 }
 
 .nav-panel-menu {
@@ -86,10 +92,6 @@
 
 .nav-menu h3.title {
   line-height: 1.35;
-}
-
-.nav-panel-explore .context {
-  @apply dark:text-gray-300;
 }
 
 nav a:hover {
@@ -134,4 +136,17 @@ nav a:hover {
 
 .toc.embedded + #preamble .abstract blockquote {
   margin-top: 1.5em;
+}
+
+.doc .admonitionblock .title,
+.doc .exampleblock .title,
+.doc .imageblock .title,
+.doc .literalblock .title,
+.doc .listingblock .title,
+.doc .tableblock caption {
+  @apply text-gray-700 dark:text-gray-200;
+}
+
+.doc .imageblock .title {
+  margin-top: 0.5rem;
 }

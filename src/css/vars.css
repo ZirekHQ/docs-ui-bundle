@@ -24,7 +24,7 @@
   --body-line-height: 1.15;
   --body-font-color: var(--color-jet-70);
   --body-font-family: "Roboto", sans-serif;
-  --body-font-weight-bold: 500;
+  --body-font-weight-bold: 600;
   --monospace-font-family: "Roboto Mono", monospace;
   --monospace-font-weight-bold: 500;
   /* base */
@@ -89,6 +89,7 @@
   --admonition-background: var(--panel-background);
   --admonition-label-font-weight: var(--body-font-weight-bold);
   --caption-font-color: var(--color-gray-70);
+  --caption-font-style: italic;
   --caption-font-weight: var(--body-font-weight-bold);
   --code-background: var(--panel-background);
   --code-font-color: var(--body-font-color);

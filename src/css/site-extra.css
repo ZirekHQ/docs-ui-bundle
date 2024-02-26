@@ -131,7 +131,8 @@ nav a:hover {
   border-radius: 8px;
   border-color: #aad0ee; /* TO-DO: define as fp-blue... or var */
   font-size: 0.9em;
-  font-weight: 600;
+  font-style: var(--caption-font-style);
+  text-align: justify;
 }
 
 .toc.embedded + #preamble .abstract blockquote {

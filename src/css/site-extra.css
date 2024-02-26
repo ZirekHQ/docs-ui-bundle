@@ -133,6 +133,7 @@ nav a:hover {
   font-size: 0.9em;
   font-style: var(--caption-font-style);
   text-align: justify;
+  padding-bottom: 1.1em;
 }
 
 .toc.embedded + #preamble .abstract blockquote {

@@ -988,13 +988,3 @@ table.dataTable.display tbody tr:hover > .sorting_3,
 table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
   @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.062)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.075)];
 }
-
-/* footnotes */
-#footnotes {
-  margin: 2.0rem -1.0rem 0;
-}
-
-#footnotes div.footnote {
-  margin: 0 1.0rem;
-  font-size: 0.9em;
-}

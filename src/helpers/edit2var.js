@@ -21,6 +21,10 @@ module.exports = (editUrl, type) => {
     }
     if (type === 'history') return editUrl.replace(/\/edit\//, '/commits/')
   }
+  if (editUrl.includes('://forge.fedoraproject.org/')) {
+    if (type === 'issue') return editUrl.replace(/\/src\/branch\/(\w+)\/(.*)$/, '/issues/new?title=[$1] Doc issue in file $2')
+    if (type === 'history') return editUrl.replace(/\/src\//, '/commits/')
+  }
 
   return false
 }

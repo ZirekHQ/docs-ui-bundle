@@ -15,7 +15,8 @@
 @import "doc.css";
 @import "header.css";
 @import "footer.css";
-@import "highlight.css";
+@import "hljs-github.css";
+@import "hljs-github-dark.css";
 @import "homepage.css";
 @import "contributing.css";
 @import "jquery.dataTables.css";

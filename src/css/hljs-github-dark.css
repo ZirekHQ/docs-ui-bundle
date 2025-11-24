@@ -78,6 +78,12 @@
   color: #7ee787;
 }
 
+.dark .hljs-link,
+.dark .hljs-tag {
+  /* Added for Fedora Docs */
+  color: #00cc33;
+}
+
 .dark .hljs-subst {
   /* prettylights-syntax-storage-modifier-import */
   color: #c9d1d9;

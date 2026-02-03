@@ -15,9 +15,11 @@ ui:
 
 ## Build and preview the UI
 
+### Using containers with [podman](https://podman.io/)
+
 These instructions work on Fedora, using podman.
 
-### Set up your project
+#### Set up your project
 
 Go to your Antora UI project directory. For example:
 
@@ -32,7 +34,7 @@ Build the builder image:
 $ podman build . -t fedora-docs-ui
 ```
 
-### Finally, preview and build
+#### Preview and build
 
 Build a live preview:
 
@@ -49,6 +51,37 @@ $ podman run --rm -v $(pwd):/antora:Z fedora-docs-ui bundle
 ```
 
 The generated archive can be found in `build/ui-bundle.zip`.
+
+### Local development with [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+Go to your Antora UI project directory:
+
+```
+$ git clone https://gitlab.com/fedora/docs/docs-website/ui-bundle.git
+$ cd ui-bundle
+```
+
+Install dependencies:
+
+```
+$ npm install
+```
+
+Build the UI bundle:
+
+```
+$ npx gulp
+```
+
+Or build and preview with live reload:
+
+```
+$ npx gulp preview
+```
+
+Preview it on [localhost:5252](http://localhost:5252).
+
+The generated bundle can be found in `build/ui-bundle.zip`.
 
 ### License
 

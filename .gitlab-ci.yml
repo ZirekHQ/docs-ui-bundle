@@ -1,4 +1,4 @@
-image: node:16-bullseye
+image: node:22-bookworm
 stages: [setup, verify, deploy]
 install:
   stage: setup
@@ -19,8 +19,8 @@ lint:
   - node_modules/.bin/gulp lint
 bundle-stable:
   stage: deploy
-  only:
-  - main@fedora/docs/docs-website/ui-bundle
+  rules:
+  - if: $CI_COMMIT_BRANCH == "main" && $CI_PROJECT_PATH == "fedora/docs/docs-website/ui-bundle"
   cache: *pull_cache
   script:
   - *npm_install
@@ -30,8 +30,8 @@ bundle-stable:
     - build/ui-bundle.zip
 bundle-stg:
   stage: deploy
-  only:
-  - stg@fedora/docs/docs-website/ui-bundle
+  rules:
+  - if: $CI_COMMIT_BRANCH == "stg" && $CI_PROJECT_PATH == "fedora/docs/docs-website/ui-bundle"
   cache: *pull_cache
   script:
   - *npm_install
@@ -41,9 +41,8 @@ bundle-stg:
     - build/ui-bundle.zip
 bundle-dev:
   stage: deploy
-  except:
-  - main
-  - stg
+  rules:
+  - if: $CI_COMMIT_BRANCH != "main" && $CI_COMMIT_BRANCH != "stg"
   cache: *pull_cache
   script:
   - *npm_install
@@ -54,8 +53,8 @@ bundle-dev:
     - build/ui-bundle.zip
 pages:
   stage: deploy
-  only:
-  - main@fedora/docs/docs-website/ui-bundle
+  rules:
+  - if: $CI_COMMIT_BRANCH == "main" && $CI_PROJECT_PATH == "fedora/docs/docs-website/ui-bundle"
   cache: *pull_cache
   script:
   - *npm_install

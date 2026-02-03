@@ -1,6 +1,6 @@
-FROM fedora:38
+FROM fedora:latest
 
-RUN dnf -y module install nodejs:16/minimal && \
+RUN dnf -y install nodejs npm && \
     dnf clean all
 
 WORKDIR /antora

@@ -14,7 +14,7 @@
 }
 
 .toc .title{
-  font-family: "Open sans", Helvetica, Arial;
+  font-family: "Open Sans", Helvetica, Arial;
   font-size: 24px;
   color: #191919;
   font-weight: 600;
@@ -40,18 +40,18 @@ article.doc h1 {
 }
 
 ul.nav-list {
-  font-family: "Open sans", Helvetica, Arial;
+  font-family: "Open Sans", Helvetica, Arial;
 }
 
 
 .doc h3 {
-  font-family: "Open sans", Helvetica, Arial;
+  font-family: "Open Sans", Helvetica, Arial;
   font-size: 24px;
 }
 
 /* Add an H4 heading to fix issues with H4 content displaying same size as H2 */
 .doc h4 {
-  font-family: "Open sans", Helvetica, Arial;
+  font-family: "Open Sans", Helvetica, Arial;
   font-size: 20px;
 }
 

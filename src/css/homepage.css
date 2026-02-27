@@ -9,7 +9,7 @@ div.homepage-section h3 {
 }
 
 div.homepage-section a.homepage-link-primary h3 {
-    font-size: 28px;
+    font-size: clamp(24px, 5vw, 28px);
     font-weight: 400;
 }
 

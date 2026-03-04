@@ -5,23 +5,27 @@
   hyphens: none;
 }
 
-@media (min-width: 1024px) {
-  .crumbs {
-    display: block;
-  }
-}
-
-a + .crumbs {
-  padding-left: 0.05rem;
-}
-
 .crumbs ul {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
   list-style: none;
   color: #0275d8;
+}
+
+@media (min-width: 1024px) {
+  .crumbs {
+    display: block;
+  }
+
+  .crumbs ul {
+    display: flex;
+  }
+}
+
+a + .crumbs {
+  padding-left: 0.05rem;
 }
 
 .crumbs li {

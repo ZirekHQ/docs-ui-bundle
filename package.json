@@ -1,11 +1,11 @@
 {
-  "name": "@antora/ui-default",
-  "description": "An archetype project that produces a UI for creating documentation sites with Antora",
-  "homepage": "https://gitlab.com/antora/antora-ui-default",
+  "name": "@zirekhq/docs-ui-bundle",
+  "description": "Antora UI bundle for the ZirekHQ documentation site. Forked from fedora/docs/docs-website/ui-bundle (itself derived from @antora/ui-default).",
+  "homepage": "https://github.com/ZirekHQ/docs-ui-bundle",
   "license": "MPL-2.0",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/antora/antora-ui-default.git"
+    "url": "https://github.com/ZirekHQ/docs-ui-bundle.git"
   },
   "engines": {
     "node": ">= 8.0.0"

@@ -21,16 +21,20 @@ module.exports = {
             darkest: "#535961",
           },
           blue: {
-            light: "#51a2da",
-            DEFAULT: "#3c6eb4",
-            dark: "#294172",
-            darker: "#0c1420",
-            darkest: "#080d15",
+            // A teal/cyan scale anchored on the logo's accent (#00D2FF) and
+            // background (#0B0F19), replacing Fedora's blue. `light`/`DEFAULT`/
+            // `dark` are used as visible link and accent text/backgrounds in both
+            // color schemes; `darker`/`darkest` are dark-mode surface backgrounds.
+            light: "#00D2FF",
+            DEFAULT: "#0EA5C4",
+            dark: "#0B7A94",
+            darker: "#0B0F19",
+            darkest: "#070911",
           },
           green: {
-            lighest: "#e9f9dd",
-            light: "#bbed97",
-            DEFAULT: "#79db32",
+            lighest: "#d7f9ec",
+            light: "#6ee7c0",
+            DEFAULT: "#10B981",
           },
           magenta: {
             lightest: "#f9dde9",

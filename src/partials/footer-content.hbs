@@ -1,74 +1,13 @@
 <footer class="flex flex-col bg-fp-gray-lightest dark:bg-fp-blue-darkest dark:text-fp-gray-light text-sm dark:border-t dark:border-gray-800">
   <section class="pt-2 pb-6 px-2">
-
-    <p class="text-center">All Fedora Documentation content available under <a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">CC BY-SA 4.0</a> or, when specifically noted, under another <a href="https://fedoraproject.org/wiki/Licensing:Main">accepted</a> free and open content license.</p>
-
-    <div class="container mx-auto flex flex-col lg:flex-row my-4">
-      <div class="mx-auto lg:mx-0 lg:basis-3/12">
-        <img
-          src="{{uiRootPath}}/img/fedora-blue.svg"
-          alt="Fedora Logo"
-          class="w-36 mb-4 lg:mb-0"
-        />
-      </div>
-      <ul
-        class="mx-4 flex items-center grow justify-center gap-4 lg:mx-0 lg:gap-12 xl:gap-20 2xl:gap-28 lg:justify-start"
-      >
-        <li class="list-none">
-          <a
-            href="{{site.path}}/legal/privacy/"
-            class="text-fp-gray-darkest dark:text-fp-gray transition duration-300 ease-in-out hover:text-fp-gray dark:hover:text-fp-gray-light"
-            >Privacy Statement</a
-          >
-        </li>
-        <li class="list-none">
-          <a
-            href="{{site.path}}/legal/"
-            class="text-fp-gray-darkest transition duration-300 ease-in-out hover:text-fp-gray dark:text-fp-gray dark:hover:text-fp-gray-light"
-            >Legal</a
-          >
-        </li>
-        <li class="list-none">
-          <a
-            href="{{site.path}}/project/code-of-conduct/"
-            class="text-fp-gray-darkest transition duration-300 ease-in-out hover:text-fp-gray dark:text-fp-gray dark:hover:text-fp-gray-light"
-            >Code of Conduct</a
-          >
-        </li>
-        <li class="list-none">
-          <a
-            href="https://getfedora.org/en/sponsors/"
-            class="text-fp-gray-darkest transition duration-300 ease-in-out hover:text-fp-gray dark:text-fp-gray dark:hover:text-fp-gray-light"
-            >Sponsors</a
-          >
-        </li>
-      </ul>
-    </div>
+    <p class="text-center">
+      <a href="https://github.com/ZirekHQ" class="text-fp-gray-darkest dark:text-fp-gray transition duration-300 ease-in-out hover:text-fp-gray dark:hover:text-fp-gray-light">ZirekHQ</a>
+      on GitHub
+    </p>
     <p class="text-center text-xs text-fp-gray-dark">
       {{~#if env.ANTORA_DATE}}Last build: {{{env.ANTORA_DATE}}} {{/if~}}
       {{~#if page.attributes.creation-date}} | Page creation date: {{{page.attributes.creation-date}}} {{/if~}}
       {{~#if page.attributes.last-updated}} | Last content update: {{{page.attributes.last-updated}}} {{/if~}}
     </p>
-  </section>
-  <!-- Red Hat Sponsorship Section -->
-  <section class="bg-black py-6 text-center md:text-left px-2">
-    <div class="container mx-auto flex flex-col lg:flex-row">
-      <div class="mx-auto items-center lg:mx-0 lg:basis-3/12">
-        <img
-          src="{{uiRootPath}}/img/logo-sponsored-by-red-hat.png"
-          alt="Sponsored by Red Hat Logo"
-          class="mb-4 xl:mb-0"
-        />
-      </div>
-
-      <div class="flex items-center justify-center text-center lg:text-left lg:ml-8 xl:-ml-8 2xl:ml-5">
-        <p class="text-white">
-          Fedora is sponsored by Red Hat.
-          <a class="block text-fp-gray xl:ml-2 xl:inline" href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">
-            Learn more about the relationship between Red Hat and Fedora.
-          </a>
-        </p>
-      </div>
-    </div>
   </section>
 </footer>

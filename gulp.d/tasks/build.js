@@ -72,8 +72,12 @@ module.exports = (src, dest, preview) => () => {
           if (file.relative.endsWith('.bundle.js')) {
             const mtimePromises = []
             const bundlePath = file.path
-            browserify(file.relative, { basedir: src, detectGlobals: false })
-              .plugin('browser-pack-flat/plugin')
+            const bundler = browserify(file.relative, { basedir: src, detectGlobals: false })
+            // browser-pack-flat's acorn-based scope hoisting can't parse the modern
+            // syntax already present in some vendor bundles' minified output (e.g.
+            // mermaid.min.js), so skip the optimization for those specifically.
+            if (!/mermaid/.test(file.relative)) bundler.plugin('browser-pack-flat/plugin')
+            bundler
               .on('file', (bundledPath) => {
                 if (bundledPath !== bundlePath) mtimePromises.push(fs.stat(bundledPath).then(({ mtime }) => mtime))
               })

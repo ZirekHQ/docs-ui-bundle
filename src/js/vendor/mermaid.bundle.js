@@ -1,7 +1,10 @@
 ;(function () {
   'use strict'
 
-  var mermaid = require('mermaid')
+  // mermaid >=10 ships ESM-only via package.json "exports" (no "main"), which
+  // browserify's CJS resolver can't see; requiring the UMD dist file directly
+  // skips that resolution and gets the same bundled build.
+  var mermaid = require('mermaid/dist/mermaid.js')
 
   var blocks = [].slice.call(document.querySelectorAll('pre code.language-mermaid'))
   if (!blocks.length) return

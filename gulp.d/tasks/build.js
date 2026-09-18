@@ -72,11 +72,16 @@ module.exports = (src, dest, preview) => () => {
           if (file.relative.endsWith('.bundle.js')) {
             const mtimePromises = []
             const bundlePath = file.path
-            const bundler = browserify(file.relative, { basedir: src, detectGlobals: false })
+            const isMermaid = /mermaid/.test(file.relative)
+            // mermaid's UMD dist embeds its own closure-scoped module registry
+            // (for the optional ELK layout engine); its relative require() calls
+            // don't resolve on disk, so browserify must not parse into the file.
+            const noParse = isMermaid ? [require.resolve('mermaid/dist/mermaid.js')] : []
+            const bundler = browserify(file.relative, { basedir: src, detectGlobals: false, noParse })
             // browser-pack-flat's acorn-based scope hoisting can't parse the modern
             // syntax already present in some vendor bundles' minified output (e.g.
             // mermaid.min.js), so skip the optimization for those specifically.
-            if (!/mermaid/.test(file.relative)) bundler.plugin('browser-pack-flat/plugin')
+            if (!isMermaid) bundler.plugin('browser-pack-flat/plugin')
             bundler
               .on('file', (bundledPath) => {
                 if (bundledPath !== bundlePath) mtimePromises.push(fs.stat(bundledPath).then(({ mtime }) => mtime))

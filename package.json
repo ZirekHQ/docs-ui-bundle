@@ -27,6 +27,7 @@
     "browser-pack-flat": "~3.5.0",
     "browserify": "~17.0.0",
     "cssnano": "~9.0.0",
+    "datatables.net-dt": "^3.0.4",
     "eslint": "~9.39.5",
     "fancy-log": "~2.0.0",
     "fs-extra": "~11.4.0",
@@ -39,7 +40,7 @@
     "gulp-uglify": "~3.0",
     "gulp-vinyl-zip": "~2.5.0",
     "handlebars": "~4.7",
-    "highlight.js": "10.7.3",
+    "highlight.js": "11.12.0",
     "js-yaml": "~5.4.0",
     "mermaid": "12.0.0",
     "neostandard": "^0.13.0",
@@ -58,9 +59,5 @@
     "typeface-roboto-mono": "1.1.13",
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~4.0.0"
-  },
-  "dependencies": {
-    "datatables.net-dt": "^1.12.1",
-    "jquery": "^4.0.0"
   }
 }

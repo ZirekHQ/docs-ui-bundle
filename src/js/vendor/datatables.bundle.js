@@ -1,7 +1,6 @@
 ;(function () {
   'use strict'
 
-  require('jquery')
   var DataTable = require('datatables.net')
   ;[].slice.call(document.querySelectorAll('table.datatable')).forEach(function (node) {
     new DataTable(node, { // eslint-disable-line no-new

@@ -1,5 +1,6 @@
 {
   "extends": "standard",
+  "ignorePatterns": ["src/js/vendor/"],
   "rules": {
     "arrow-parens": ["error", "always"],
     "comma-dangle": ["error", {

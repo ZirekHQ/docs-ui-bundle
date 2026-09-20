@@ -1,10 +1,8 @@
 ;(function () {
   'use strict'
 
-  // mermaid >=10 ships ESM-only via package.json "exports" (no "main"), which
-  // browserify's CJS resolver can't see; requiring the UMD dist file directly
-  // skips that resolution and gets the same bundled build.
-  var mermaid = require('mermaid/dist/mermaid.js')
+  // gulp.d/tasks/build.js prepends mermaid's dist IIFE, which registers window.mermaid.
+  var mermaid = window.mermaid
 
   var blocks = [].slice.call(document.querySelectorAll('pre code.language-mermaid'))
   if (!blocks.length) return
@@ -25,8 +23,5 @@
     wrapper.parentNode.replaceChild(div, wrapper)
   })
 
-  // mermaid.init() only reliably renders when given a selector string (its
-  // documented default) -- an explicit array of DOM nodes resolves the
-  // returned promise without an error, but silently renders nothing.
-  mermaid.init(undefined, '.mermaid')
+  mermaid.run({ querySelector: '.mermaid' })
 })()

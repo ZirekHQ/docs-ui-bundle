@@ -1,3 +1,5 @@
+@reference "./tailwind.css";
+
 .search-result-dropdown-menu {
   position: absolute;
   z-index: 100;

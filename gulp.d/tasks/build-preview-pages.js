@@ -3,7 +3,7 @@
 const Asciidoctor = require('@asciidoctor/core')()
 const fs = require('fs-extra')
 const handlebars = require('handlebars')
-const merge = require('merge-stream')
+const merge = require('../lib/merge-streams')
 const ospath = require('path')
 const path = ospath.posix
 const requireFromString = require('require-from-string')
@@ -86,7 +86,7 @@ module.exports = (src, previewSrc, previewDest, sink = () => map()) => (done) =>
     )
 
 function loadSampleUiModel (src) {
-  return fs.readFile(ospath.join(src, 'ui-model.yml'), 'utf8').then((contents) => yaml.safeLoad(contents))
+  return fs.readFile(ospath.join(src, 'ui-model.yml'), 'utf8').then((contents) => yaml.load(contents))
 }
 
 function registerPartials (src) {
@@ -128,7 +128,7 @@ function compileLayouts (src) {
 
 function copyImages (src, dest) {
   return vfs
-    .src('**/*.{png,svg}', { base: src, cwd: src })
+    .src('**/*.{png,svg}', { base: src, cwd: src, encoding: false })
     .pipe(vfs.dest(dest))
     .pipe(map((file, enc, next) => next()))
 }

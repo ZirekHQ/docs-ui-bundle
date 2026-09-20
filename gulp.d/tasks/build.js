@@ -6,8 +6,7 @@ const buffer = require('vinyl-buffer')
 const concat = require('gulp-concat')
 const cssnano = require('cssnano')
 const fs = require('fs-extra')
-const imagemin = require('gulp-imagemin')
-const merge = require('merge-stream')
+const merge = require('../lib/merge-streams')
 const ospath = require('path')
 const path = ospath.posix
 const postcss = require('gulp-postcss')
@@ -15,8 +14,8 @@ const postcssCalc = require('postcss-calc')
 const postcssImport = require('postcss-import')
 const postcssUrl = require('postcss-url')
 const postcssVar = require('postcss-custom-properties')
-const tailwindcss = require('tailwindcss')
-const { Transform } = require('stream')
+const tailwindcss = require('@tailwindcss/postcss')
+const { Readable, Transform } = require('stream')
 const map = (transform) => new Transform({ objectMode: true, transform })
 const through = () => map((file, enc, next) => next(null, file))
 const uglify = require('gulp-uglify')
@@ -24,6 +23,7 @@ const vfs = require('vinyl-fs')
 
 module.exports = (src, dest, preview) => () => {
   const opts = { base: src, cwd: src }
+  const binaryOpts = { ...opts, encoding: false }
   const sourcemaps = preview || process.env.SOURCEMAPS === 'true'
   const postcssPlugins = [
     postcssImport,
@@ -53,12 +53,42 @@ module.exports = (src, dest, preview) => () => {
     postcssVar({ preserve: preview }),
     preview ? postcssCalc : () => {},
     autoprefixer,
-    preview
-      ? () => {}
-      : (css, result) => cssnano({ preset: 'default' })(css, result).then(() => postcssPseudoElementFixer(css, result)),
+    preview ? () => {} : cssnano({ preset: 'default' }),
+    preview ? () => {} : postcssPseudoElementFixer(),
   ]
 
-  return merge(
+  // mermaid's dist is a global IIFE that breaks inside a browserify module wrapper, so it is prepended as-is.
+  const mermaidDist = fs.readFileSync(require.resolve('mermaid/dist/mermaid.min.js'))
+  const withMermaid = (bundleBuffer) => Buffer.concat([mermaidDist, Buffer.from(';\n'), bundleBuffer])
+  // see https://gulpjs.org/recipes/browserify-multiple-destination.html
+  const vendorBundles = map((file, enc, next) => {
+    if (file.relative.endsWith('.bundle.js')) {
+      const mtimePromises = []
+      const bundlePath = file.path
+      const isMermaid = /mermaid/.test(file.relative)
+      const bundler = browserify(file.relative, { basedir: src, detectGlobals: false })
+      bundler.plugin('browser-pack-flat/plugin')
+      bundler
+        .on('file', (bundledPath) => {
+          if (bundledPath !== bundlePath) mtimePromises.push(fs.stat(bundledPath).then(({ mtime }) => mtime))
+        })
+        .bundle((bundleError, bundleBuffer) =>
+          Promise.all(mtimePromises).then((mtimes) => {
+            const newestMtime = mtimes.reduce((max, curr) => (curr > max ? curr : max), file.stat.mtime)
+            if (newestMtime > file.stat.mtime) file.stat.mtimeMs = +(file.stat.mtime = newestMtime)
+            if (bundleBuffer !== undefined) file.contents = isMermaid ? withMermaid(bundleBuffer) : bundleBuffer
+            file.path = file.path.slice(0, file.path.length - 10) + '.js'
+            next(bundleError, file)
+          })
+        )
+    } else {
+      fs.readFile(file.path, 'UTF-8').then((contents) => {
+        file.contents = Buffer.from(contents)
+        next(null, file)
+      })
+    }
+  })
+  const merged = merge(
     vfs
       .src('js/+([0-9])-*.js', { ...opts, sourcemaps })
       .pipe(uglify())
@@ -66,43 +96,7 @@ module.exports = (src, dest, preview) => () => {
       .pipe(concat('js/site.js')),
     vfs
       .src('js/vendor/*([^.])?(.bundle).js', { ...opts, read: false })
-      .pipe(
-        // see https://gulpjs.org/recipes/browserify-multiple-destination.html
-        map((file, enc, next) => {
-          if (file.relative.endsWith('.bundle.js')) {
-            const mtimePromises = []
-            const bundlePath = file.path
-            const isMermaid = /mermaid/.test(file.relative)
-            // mermaid's UMD dist embeds its own closure-scoped module registry
-            // (for the optional ELK layout engine); its relative require() calls
-            // don't resolve on disk, so browserify must not parse into the file.
-            const noParse = isMermaid ? [require.resolve('mermaid/dist/mermaid.js')] : []
-            const bundler = browserify(file.relative, { basedir: src, detectGlobals: false, noParse })
-            // browser-pack-flat's acorn-based scope hoisting can't parse the modern
-            // syntax already present in some vendor bundles' minified output (e.g.
-            // mermaid.min.js), so skip the optimization for those specifically.
-            if (!isMermaid) bundler.plugin('browser-pack-flat/plugin')
-            bundler
-              .on('file', (bundledPath) => {
-                if (bundledPath !== bundlePath) mtimePromises.push(fs.stat(bundledPath).then(({ mtime }) => mtime))
-              })
-              .bundle((bundleError, bundleBuffer) =>
-                Promise.all(mtimePromises).then((mtimes) => {
-                  const newestMtime = mtimes.reduce((max, curr) => (curr > max ? curr : max), file.stat.mtime)
-                  if (newestMtime > file.stat.mtime) file.stat.mtimeMs = +(file.stat.mtime = newestMtime)
-                  if (bundleBuffer !== undefined) file.contents = bundleBuffer
-                  file.path = file.path.slice(0, file.path.length - 10) + '.js'
-                  next(bundleError, file)
-                })
-              )
-          } else {
-            fs.readFile(file.path, 'UTF-8').then((contents) => {
-              file.contents = Buffer.from(contents)
-              next(null, file)
-            })
-          }
-        })
-      )
+      .pipe(vendorBundles)
       .pipe(buffer())
       .pipe(uglify()),
     vfs
@@ -113,33 +107,45 @@ module.exports = (src, dest, preview) => () => {
     vfs
       .src(['css/site.css', 'css/search.css', 'css/vendor/*.css'], { ...opts, sourcemaps })
       .pipe(postcss((file) => ({ plugins: postcssPlugins, options: { file } }))),
-    vfs.src('font/*.{ttf,woff*(2)}', opts),
-    vfs.src('img/**/*.{gif,ico,jpg,png,svg}', opts).pipe(
-      preview
-        ? through()
-        : imagemin(
-          [
-            imagemin.gifsicle(),
-            imagemin.jpegtran(),
-            imagemin.optipng(),
-            imagemin.svgo({
-              plugins: [
-                { cleanupIDs: { preservePrefixes: ['icon-', 'view-'] } },
-                { removeViewBox: false },
-                { removeDesc: false },
-              ],
-            }),
-          ].reduce((accum, it) => (it ? accum.concat(it) : accum), [])
-        )
+    fs.pathExistsSync(ospath.join(src, 'font')) ? vfs.src('font/*.{ttf,woff*(2)}', binaryOpts) : Readable.from([]),
+    vfs.src('img/**/*.{gif,ico,jpg,png,svg}', binaryOpts).pipe(
+      preview ? through() : optimizeImages()
     ),
     vfs.src('helpers/*.js', opts),
     vfs.src('layouts/*.hbs', opts),
     vfs.src('partials/*.hbs', opts)
-  ).pipe(vfs.dest(dest, { sourcemaps: sourcemaps && '.' }))
+  )
+  vendorBundles.on('error', (err) => merged.destroy(err))
+  const out = merged.pipe(vfs.dest(dest, { sourcemaps: sourcemaps && '.' }))
+  merged.on('error', (err) => out.destroy(err))
+  return out
 }
 
-function postcssPseudoElementFixer (css, result) {
-  css.walkRules(/(?:^|[^:]):(?:before|after)/, (rule) => {
-    rule.selector = rule.selectors.map((it) => it.replace(/(^|[^:]):(before|after)$/, '$1::$2')).join(',')
-  })
+function optimizeImages () {
+  return map((file, enc, next) =>
+    import('gulp-imagemin').then(({ default: imagemin, gifsicle, mozjpeg, optipng, svgo }) => {
+      const svgoPlugins = [
+        {
+          name: 'preset-default',
+          params: {
+            overrides: { cleanupIds: { preservePrefixes: ['icon-', 'view-'] }, removeViewBox: false, removeDesc: false },
+          },
+        },
+      ]
+      const stream = imagemin([gifsicle(), mozjpeg(), optipng(), svgo({ plugins: svgoPlugins })], { silent: true })
+      stream.on('data', (optimized) => next(null, optimized)).on('error', next)
+      stream.end(file)
+    }, next)
+  )
+}
+
+function postcssPseudoElementFixer () {
+  return {
+    postcssPlugin: 'pseudo-element-fixer',
+    OnceExit (css) {
+      css.walkRules(/(?:^|[^:]):(?:before|after)/, (rule) => {
+        rule.selector = rule.selectors.map((it) => it.replace(/(^|[^:]):(before|after)$/, '$1::$2')).join(',')
+      })
+    },
+  }
 }

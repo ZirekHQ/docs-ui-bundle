@@ -22,7 +22,7 @@
 @import "hljs-github-dark.css";
 @import "homepage.css";
 @import "contributing.css";
-@import "jquery.dataTables.css";
+@import "datatables.net-dt/css/dataTables.dataTables.css";
 @import "site-extra.css";
 @import "tailwind.css";
 @import "fonts.css";

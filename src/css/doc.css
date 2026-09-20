@@ -922,69 +922,8 @@ kbd,
   border-radius: 8px;
 }
 
-/* Don't leave ocean of space between table and info text */
-.doc table.tableblock + div.dataTables_info {
-  margin-top: -2rem;
-  margin-bottom: 2rem;
-}
-
 /* Dark mode styling for extra dataTables content */
-.doc .dataTables_filter,
-.doc .dataTables_info {
+.doc .dt-search,
+.doc .dt-info {
   @apply text-fp-gray-dark dark:text-fp-gray-light;
-}
-
-/* Recreate jqueryui-datatables table row striping with dark mode */
-.doc table.dataTable.stripe > tbody > tr.odd > *,
-.doc table.dataTable.display > tbody > tr.odd > * {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.023)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.04)];
-}
-
-.doc table.dataTable.hover > tbody > tr:hover > *,
-.doc table.dataTable.display > tbody > tr:hover > * {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.035)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.06)];
-}
-
-.doc table.dataTable.order-column > tbody tr > .sorting_1,
-.doc table.dataTable.order-column > tbody tr > .sorting_2,
-.doc table.dataTable.order-column > tbody tr > .sorting_3,
-.doc table.dataTable.display > tbody tr > .sorting_1,
-.doc table.dataTable.display > tbody tr > .sorting_2,
-.doc table.dataTable.display > tbody tr > .sorting_3 {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.019)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.029)];
-}
-
-.doc table.dataTable.display > tbody > tr.odd > .sorting_1,
-.doc table.dataTable.order-column.stripe > tbody > tr.odd > .sorting_1 {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.054)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.08)];
-}
-
-.doc table.dataTable.display > tbody > tr.even > .sorting_1,
-.doc table.dataTable.order-column.stripe > tbody > tr.even > .sorting_1 {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.019)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.035)];
-}
-
-.doc table.dataTable.display > tbody > tr.even > .sorting_2,
-.doc table.dataTable.order-column.stripe > tbody > tr.even > .sorting_2 {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.011)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.02)];
-}
-
-.doc table.dataTable.display > tbody > tr.even > .sorting_3,
-.doc table.dataTable.order-column.stripe > tbody > tr.even > .sorting_3 {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.003)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.006)];
-}
-
-.doc table.dataTable.display tbody tr:hover > .sorting_1,
-.doc table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.082)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.1)];
-}
-
-table.dataTable.display tbody tr:hover > .sorting_2,
-table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.074)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.09)];
-}
-
-table.dataTable.display tbody tr:hover > .sorting_3,
-table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
-  @apply shadow-[inset_0_0_0_9999px_rgba(0,0,0,0.062)] dark:shadow-[inset_0_0_0_9999px_rgba(255,255,255,0.075)];
 }

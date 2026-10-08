@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 'use strict'
 
 const { expect } = require('./harness')
@@ -46,7 +45,7 @@ describe('08-copy-versioned-url', () => {
     timeout = {
       invocations: [],
       setTimeout: function (callback, time) {
-        timeout.invocations.push({ callback: callback, time: time })
+        timeout.invocations.push({ callback, time })
       },
       run: function () {
         timeout.invocations.forEach((i) => {
@@ -80,7 +79,7 @@ describe('08-copy-versioned-url', () => {
         hash: undefined,
       },
       navigator: {
-        clipboard: clipboard,
+        clipboard,
       },
     }
     originalSetTimeout = global.setTimeout

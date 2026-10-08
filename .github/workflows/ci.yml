@@ -23,10 +23,13 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Rebuild image-optimization binaries
-        run: npm rebuild gifsicle optipng-bin jpegtran-bin
+        run: npm rebuild gifsicle optipng-bin mozjpeg
 
-      - name: Test
-        run: npm test
+      - name: Run tests with coverage gate
+        run: npm run coverage
+
+      - name: Audit shipped dependencies
+        run: npm audit --omit=dev --audit-level=low
 
       - name: Build UI bundle
         run: node_modules/.bin/gulp bundle

@@ -4,7 +4,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "start": "gulp preview",
-    "test": "_mocha"
+    "test": "_mocha --config test/harness/mocha/config.js"
   },
   "engines": {
     "node": ">=22.12.0"

@@ -1,16 +1,11 @@
 # ZirekHQ docs UI bundle
 
-Antora UI for the ZirekHQ documentation site.
+Antora UI bundle for the ZirekHQ documentation site (https://zirekhq.github.io/).
 
-This is a fork of [fedora/docs/docs-website/ui-bundle](https://gitlab.com/fedora/docs/docs-website/ui-bundle)
-(itself derived from [`@antora/ui-default`](https://gitlab.com/antora/antora-ui-default)),
-rebranded for ZirekHQ (logo, color palette, footer, contributing link) and with a
-completed multi-language switcher (`page-languages.hbs` — upstream ships this as an
-unfinished stub hardcoded to one language).
+It is a fork of the [hominux docs UI](https://github.com/hominux/docs-ui-bundle), which is itself a fork of
+[antora-ui-spring](https://github.com/spring-io/antora-ui-spring), rebranded with the ZirekHQ name, logo and colours.
 
-## How to use it with Antora
-
-Add the following configuration in your Antora playbook:
+Use the latest build in an Antora playbook:
 
 ```yaml
 ui:
@@ -19,40 +14,7 @@ ui:
     snapshot: true
 ```
 
-## Build and preview the UI
+Build it with `npm ci && npx gulp bundle`; the result is `build/ui-bundle.zip`. `npm test` runs the helper, branding and
+contrast tests.
 
-### Local development with [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-
-```
-$ git clone https://github.com/ZirekHQ/docs-ui-bundle.git
-$ cd docs-ui-bundle
-$ npm install
-```
-
-Build the UI bundle:
-
-```
-$ npx gulp
-```
-
-Or build and preview with live reload:
-
-```
-$ npx gulp preview
-```
-
-Preview it on [localhost:5252](http://localhost:5252).
-
-The generated bundle can be found in `build/ui-bundle.zip`. On push to `main`, CI
-publishes this as the `latest` GitHub Release asset at the URL above.
-
-### License
-
-Most source code for the project is licensed under the
-Mozilla License 2.0 (MPL-2.0).
-A copy can be found in the `./LICENSE` file.
-
-The clipboard icon comes from the Adwaita icon theme,
-courtesy of the GNOME Project https://gnome.org/.
-License: Creative Commons Attribution Share-Alike 3.0 (CC-BY-SA-3.0).
-A copy can be found in `./LICENSES/CC-BY-SA-3.0.txt`.
+Licensed under MPL-2.0.

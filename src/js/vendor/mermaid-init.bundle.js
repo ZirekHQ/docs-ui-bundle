@@ -1,21 +1,18 @@
 ;(function () {
   'use strict'
 
-  // gulp.d/tasks/build.js prepends mermaid's dist IIFE, which registers window.mermaid.
-  var mermaid = window.mermaid
-
   var blocks = [].slice.call(document.querySelectorAll('pre code.language-mermaid'))
-  if (!blocks.length) return
+  if (!blocks.length || !window.mermaid) return
 
-  var isDark = document.documentElement.classList.contains('dark')
-  mermaid.initialize({
+  var isDark = document.documentElement.classList.contains('dark-theme')
+  window.mermaid.initialize({
     startOnLoad: false,
     theme: isDark ? 'dark' : 'default',
     securityLevel: 'strict',
   })
 
   blocks.forEach(function (code, idx) {
-    var wrapper = code.closest('.listingblock') || code.parentNode.parentNode
+    var wrapper = code.closest('.listingblock') || code.closest('pre')
     var div = document.createElement('div')
     div.className = 'mermaid'
     div.id = 'mermaid-diagram-' + idx
@@ -23,5 +20,5 @@
     wrapper.parentNode.replaceChild(div, wrapper)
   })
 
-  mermaid.run({ querySelector: '.mermaid' })
+  window.mermaid.run({ querySelector: '.mermaid' })
 })()

@@ -15,7 +15,7 @@ Add the following configuration in your Antora playbook:
 ```yaml
 ui:
   bundle:
-    url: https://github.com/ZirekHQ/docs-ui-bundle/releases/download/latest/ui-bundle.zip
+    url: https://github.com/ZirekHQ/docs-ui-bundle/releases/download/bundle-latest/ui-bundle.zip
     snapshot: true
 ```
 

@@ -1,92 +1,102 @@
 'use strict'
 
 const Asciidoctor = require('@asciidoctor/core')()
-const fs = require('fs-extra')
+const fs = require('node:fs')
+const { promises: fsp } = fs
 const handlebars = require('handlebars')
-const merge = require('../lib/merge-streams')
-const ospath = require('path')
+const merge = require('merge-stream')
+const ospath = require('node:path')
 const path = ospath.posix
 const requireFromString = require('require-from-string')
-const { Transform } = require('stream')
+const { Transform } = require('node:stream')
 const map = (transform = () => {}, flush = undefined) => new Transform({ objectMode: true, transform, flush })
 const vfs = require('vinyl-fs')
 const yaml = require('js-yaml')
 
 const ASCIIDOC_ATTRIBUTES = { experimental: '', icons: 'font', sectanchors: '', 'source-highlighter': 'highlight.js' }
 
-module.exports = (src, previewSrc, previewDest, sink = () => map()) => (done) =>
-  Promise.all([
-    loadSampleUiModel(previewSrc),
-    toPromise(
-      merge(compileLayouts(src), registerPartials(src), registerHelpers(src), copyImages(previewSrc, previewDest))
-    ),
-  ])
-    .then(([baseUiModel, { layouts }]) => {
-      const extensions = ((baseUiModel.asciidoc || {}).extensions || []).map((request) => {
-        ASCIIDOC_ATTRIBUTES[request.replace(/^@|\.js$/, '').replace(/[/]/g, '-') + '-loaded'] = ''
-        const extension = require(request)
-        extension.register.call(Asciidoctor.Extensions)
-        return extension
+module.exports = function buildPreviewPagesTask (src, previewSrc, previewDest, sink = () => map()) {
+  return function buildPreviewPages (done) {
+    return Promise.all([
+      loadSampleUiModel(previewSrc),
+      toPromise(
+        merge(compileLayouts(src), registerPartials(src), registerHelpers(src), copyImages(previewSrc, previewDest))
+      ),
+    ])
+      .then(([baseUiModel, { layouts }]) => {
+        const extensions = (baseUiModel.asciidoc?.extensions || []).map((request) => {
+          ASCIIDOC_ATTRIBUTES[request.replace(/^@|\.js$/, '').replaceAll('/', '-') + '-loaded'] = ''
+          const extension = require(request)
+          extension.register.call(Asciidoctor.Extensions)
+          return extension
+        })
+        const siteAsciiDocConfig = { extensions }
+        for (const component of baseUiModel.site.components) {
+          for (const version of component.versions || []) {
+            version.asciidoc = siteAsciiDocConfig
+          }
+        }
+        baseUiModel = { ...baseUiModel, env: process.env }
+        delete baseUiModel.asciidoc
+        return [baseUiModel, layouts]
       })
-      const asciidoc = { extensions }
-      for (const component of baseUiModel.site.components) {
-        for (const version of component.versions || []) version.asciidoc = asciidoc
-      }
-      baseUiModel = { ...baseUiModel, env: process.env }
-      return [baseUiModel, layouts]
-    })
-    .then(([baseUiModel, layouts]) =>
-      vfs
-        .src('**/*.adoc', { base: previewSrc, cwd: previewSrc })
-        .pipe(
-          map((file, enc, next) => {
-            const siteRootPath = path.relative(ospath.dirname(file.path), ospath.resolve(previewSrc))
-            const uiModel = { ...baseUiModel }
-            uiModel.page = { ...uiModel.page }
-            uiModel.siteRootPath = siteRootPath
-            uiModel.siteRootUrl = path.join(siteRootPath, 'index.html')
-            uiModel.uiRootPath = path.join(siteRootPath, '_')
-            if (file.stem === '404') {
-              uiModel.page = { layout: '404', title: 'Page Not Found' }
-            } else {
-              const doc = Asciidoctor.load(file.contents, { safe: 'safe', attributes: ASCIIDOC_ATTRIBUTES })
-              const pageAttributes = Object.entries(doc.getAttributes())
-                .filter(([name, val]) => name.startsWith('page-'))
-                .reduce((accum, [name, val]) => {
-                  accum[name.substr(5)] = val
-                  return accum
-                }, {})
-              const uiModelAttributes = (uiModel.page.attributes || {})
-              let uiModelPageAttributes = {}
-              if (pageAttributes.slug) {
-                uiModelPageAttributes = uiModelAttributes[pageAttributes.slug] || {}
+      .then(([baseUiModel, layouts]) =>
+        vfs
+          .src('**/*.adoc', { base: previewSrc, cwd: previewSrc })
+          .pipe(map((file, enc, next) => loadUiModelForPage(file.path).then((page) => next(null, { file, page }), next)))
+          .pipe(
+            map(({ file, page = {} }, enc, next) => {
+              const siteRootPath = path.relative(ospath.dirname(file.path), ospath.resolve(previewSrc))
+              const uiModel = { ...baseUiModel }
+              const sharedPageModel = page.component ? baseUiModel.shared[page.component.name][page.version] : {}
+              uiModel.page = { ...uiModel.page, ...sharedPageModel, ...page }
+              uiModel.siteRootPath = siteRootPath
+              uiModel.siteRootUrl = path.join(siteRootPath, 'index.html')
+              uiModel.uiRootPath = path.join(siteRootPath, '_')
+              if (file.stem === '404') {
+                uiModel.page = { layout: '404', title: 'Page Not Found' }
+              } else {
+                const doc = Asciidoctor.load(file.contents, { safe: 'safe', attributes: ASCIIDOC_ATTRIBUTES })
+                uiModel.page.attributes = Object.entries(doc.getAttributes())
+                  .filter(([name, val]) => name.startsWith('page-'))
+                  .reduce((accum, [name, val]) => {
+                    accum[name.slice(5)] = val
+                    return accum
+                  }, {})
+                uiModel.page.layout = doc.getAttribute('page-layout', 'default')
+                if (doc.hasAttribute('docrole')) uiModel.page.role = doc.getAttribute('docrole')
+                uiModel.page.title = doc.getDocumentTitle()
+                uiModel.page.contents = Buffer.from(doc.convert())
               }
-              uiModel.page.attributes = Object.assign(uiModelPageAttributes, pageAttributes)
-              uiModel.page.layout = doc.getAttribute('page-layout', 'default')
-              uiModel.page.title = doc.getDocumentTitle()
-              uiModel.asciidoc.attributes = doc.getAttributes()
-              uiModel.page.contents = Buffer.from(doc.convert())
-              uiModel.contentCatalog = {
-                getPages: () => uiModel.catalog,
-                getById: () => null,
+              file.extname = '.html'
+              try {
+                file.contents = Buffer.from(layouts.get(uiModel.page.layout)(uiModel))
+                next(null, file)
+              } catch (e) {
+                next(transformHandlebarsError(e, uiModel.page.layout))
               }
-            }
-            file.extname = '.html'
-            try {
-              file.contents = Buffer.from(layouts.get(uiModel.page.layout)(uiModel))
-              next(null, file)
-            } catch (e) {
-              next(transformHandlebarsError(e, uiModel.page.layout))
-            }
-          })
-        )
-        .pipe(vfs.dest(previewDest))
-        .on('error', done)
-        .pipe(sink())
-    )
+            })
+          )
+          .pipe(vfs.dest(previewDest))
+          .on('error', done)
+          .pipe(sink())
+      )
+  }
+}
 
 function loadSampleUiModel (src) {
-  return fs.readFile(ospath.join(src, 'ui-model.yml'), 'utf8').then((contents) => yaml.load(contents))
+  return fsp.readFile(ospath.join(src, 'ui-model.yml'), 'utf8').then((contents) => yaml.load(contents))
+}
+
+function loadUiModelForPage (srcPath) {
+  srcPath += '.yml'
+  return fsp.readFile(srcPath, 'utf8').then(
+    (contents) => yaml.load(contents, { filename: srcPath }),
+    (err) => {
+      if (err.code === 'ENOENT') return undefined
+      throw err
+    }
+  )
 }
 
 function registerPartials (src) {
@@ -99,6 +109,7 @@ function registerPartials (src) {
 }
 
 function registerHelpers (src) {
+  handlebars.registerHelper('relativize', relativize)
   handlebars.registerHelper('resolvePage', resolvePage)
   handlebars.registerHelper('resolvePageURL', resolvePageURL)
   return vfs.src('helpers/*.js', { base: src, cwd: src }).pipe(
@@ -128,24 +139,42 @@ function compileLayouts (src) {
 
 function copyImages (src, dest) {
   return vfs
-    .src('**/*.{png,svg}', { base: src, cwd: src, encoding: false })
+    .src('**/*.{png,svg}', { base: src, cwd: src })
     .pipe(vfs.dest(dest))
     .pipe(map((file, enc, next) => next()))
 }
 
+function relativize (to, { data: { root } }) {
+  if (!to) return '#'
+  if (to.charAt() !== '/') return to
+  const from = root.page.url
+  if (!from) return (root.site.path || '') + to
+  let hash = ''
+  const hashIdx = to.indexOf('#')
+  if (~hashIdx) {
+    hash = to.slice(hashIdx)
+    to = to.slice(0, hashIdx)
+  }
+  const endsWithSlash = to.endsWith('/')
+  if (to === from) return hash || (endsWithSlash ? './' : path.basename(to))
+  return (path.relative(path.dirname(from + '.'), to) || '.') + (endsWithSlash ? '/' + hash : hash)
+}
+
 function resolvePage (spec, context = {}) {
-  if (spec) return { pub: { url: resolvePageURL(spec) }, asciidoc: context }
+  if (spec) return { pub: { url: resolvePageURL(spec) } }
 }
 
 function resolvePageURL (spec, context = {}) {
-  if (spec) return '/' + (spec = spec.split(':').pop()).slice(0, spec.lastIndexOf('.')) + '.html'
+  if (!spec) return undefined
+  const page = spec.split(':').pop()
+  return '/' + page.slice(0, page.lastIndexOf('.')) + '.html'
 }
 
 function transformHandlebarsError ({ message, stack }, layout) {
   const m = stack.match(/^ *at Object\.ret \[as (.+?)\]/m)
   const templatePath = `src/${m ? 'partials/' + m[1] : 'layouts/' + layout}.hbs`
   const err = new Error(`${message}${~message.indexOf('\n') ? '\n^ ' : ' '}in UI template ${templatePath}`)
-  err.stack = [err.toString()].concat(stack.substr(message.length + 8)).join('\n')
+  err.stack = [err.toString()].concat(stack.slice(message.length + 8)).join('\n')
   return err
 }
 

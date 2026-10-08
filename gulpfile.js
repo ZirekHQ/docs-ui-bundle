@@ -42,7 +42,7 @@ const lintJsTask = createTask({
 
 const lintTestJsTask = createTask({
   name: 'lint:testjs',
-  desc: 'Lint the JavaScript source files using eslint (JavaScript Standard Style)',
+  desc: 'Lint the JavaScript test files using eslint (JavaScript Standard Style)',
   call: task.lintJs(glob.test),
 })
 
@@ -60,13 +60,13 @@ const formatJsTask = createTask({
 
 const formatTestJsTask = createTask({
   name: 'format:testjs',
-  desc: 'Format the JavaScript source files using prettify (JavaScript Standard Style)',
+  desc: 'Format the JavaScript test files using prettify (JavaScript Standard Style)',
   call: task.format(glob.test),
 })
 
 const formatTask = createTask({
   name: 'format',
-  desc: 'Lint the CSS and JavaScript source files',
+  desc: 'Format the JavaScript source and test files',
   call: parallel(formatJsTask, formatTestJsTask),
 })
 

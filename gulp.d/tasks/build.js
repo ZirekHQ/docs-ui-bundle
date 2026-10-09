@@ -12,6 +12,7 @@ const path = ospath.posix
 const postcss = require('gulp-postcss')
 const postcssCalc = require('postcss-calc')
 const postcssImport = require('postcss-import')
+const postcssVar = require('postcss-custom-properties')
 const postcssUrl = require('postcss-url')
 const { Readable, Transform } = require('node:stream')
 const { finished } = require('node:stream/promises')
@@ -56,6 +57,7 @@ module.exports = function buildTask (src, dest, preview) {
           },
         },
       ]),
+      postcssVar({ preserve: true }),
       preview ? postcssCalc : () => {},
       autoprefixer,
       preview

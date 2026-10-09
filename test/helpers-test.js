@@ -42,9 +42,11 @@ describe('logic helpers', () => {
     expect(helper('not')('')).is.true()
   })
 
-  it('notEmpty only rejects null', () => {
-    expect(helper('notEmpty')(null)).is.false()
-    expect(helper('notEmpty')('')).is.true()
+  it('component_logo maps known components to their logo file', () => {
+    expect(helper('component_logo')('dengjen-tts')).is.eql('dengjen-tts-logo.png')
+    expect(helper('component_logo')('piper-rs')).is.eql('dengjen-piper-rs-logo.png')
+    expect(helper('component_logo')('other')).is.undefined()
+    expect(helper('component_logo')(undefined)).is.undefined()
   })
 })
 

@@ -48,6 +48,7 @@
   --scrollbar-thumb-color: silver;
   --scrollbar_hover-thumb-color: silver;
   --mark-background-color: #cdf3fb;
+  --mark-font-color: #191e1e;
   --badge-background: #d4f4fc;
   --badge-font-color: #0b0f19;
   --selected-background-color: #0b0f19;
@@ -269,6 +270,7 @@ html.dark-theme {
   --link_hover-font-color: #7fe8ff;
   --scrollbar-thumb-color: #5f5f5f;
   --mark-background-color: #5b9bd5;
+  --mark-font-color: #111;
   --selected-background-color: #00d2ff;
   --badge-background: #00d2ff;
   --badge-font-color: #0b0f19;

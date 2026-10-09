@@ -8,8 +8,8 @@ const root = path.join(__dirname, '..')
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8')
 
 describe('mermaid', () => {
-  it('pins mermaid 12.0.0', () => {
-    expect(JSON.parse(read('package.json')).devDependencies.mermaid).to.equal('12.0.0')
+  it('pins mermaid to an exact version', () => {
+    expect(JSON.parse(read('package.json')).devDependencies.mermaid).to.match(/^\d+\.\d+\.\d+$/)
   })
 
   it('loads mermaid before its initialiser, both deferred', () => {

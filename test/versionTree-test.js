@@ -29,6 +29,15 @@ describe('versionTree', () => {
     expectVersions(tree.snapshot, ['3.0.1-SNAPSHOT', '3.0.0-SNAPSHOT'])
   })
 
+  it('never lists a snapshot as stable, even without a hyphen', () => {
+    const versions = ['2.0.SNAPSHOT', '2.0.0', '1.0.0-RC1']
+    const tree = treeOf({ test: { versions: versions.map((it) => version(it)) } })
+
+    expectVersions(tree.snapshot, ['2.0.SNAPSHOT'])
+    expectVersions(tree.stable, ['2.0.0'])
+    expectVersions(tree.preview, ['1.0.0-RC1'])
+  })
+
   const overrideCases = [
     ['page version overrides urls when component names are the same', 'test', '2.0.0', './page.html'],
     ['does not override if page does not define same version', 'test', '1.0.0', './version.html'],

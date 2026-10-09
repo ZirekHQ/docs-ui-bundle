@@ -33,7 +33,9 @@ function currentVersion (component, page) {
 function splitVersions (versions, versionToUrl, current, latest) {
   const toNav = (v) => navVersion(v, versionToUrl, current, latest)
   const snapshot = versions.filter((v) => v.displayVersion.includes('SNAPSHOT')).map(toNav)
-  const stable = versions.filter((v) => !v.displayVersion.includes('-')).map(toNav)
+  const stable = versions
+    .filter((v) => !v.displayVersion.includes('SNAPSHOT') && !v.displayVersion.includes('-'))
+    .map(toNav)
   const preview = versions
     .filter((v) => !v.displayVersion.includes('SNAPSHOT') && v.displayVersion.includes('-'))
     .map(toNav)

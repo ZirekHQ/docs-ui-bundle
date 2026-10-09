@@ -105,6 +105,27 @@ describe('02-on-this-page', () => {
     expect(local.classList.contains('external')).is.false()
   })
 
+  it('keeps ZirekHQ-owned links in the same tab and sends other hosts to a new one', () => {
+    const links = [
+      'https://zirekhq.github.io/dengjen-tts/next/',
+      'https://docs.zirekhq.github.io/x',
+      'https://github.com/ZirekHQ/dengjen-tts',
+      'https://github.com/ZirekHQ',
+      'https://github.com/someone/else',
+      'https://github.com/ZirekHQ-fork/repo',
+      'https://evilzirekhq.github.io/x',
+      'https://zirekhq.github.io.evil.example/x',
+    ]
+    const anchors = links.map((l) => `<a href="${l}">l</a>`).join('')
+    const page = `<div class="content"><article class="doc"><p>x</p>${anchors}</article></div>`
+    const window = runScript('02-on-this-page.js', page)
+    const targets = [...window.document.querySelectorAll('article a')].map((a) => a.getAttribute('target'))
+    expect(targets).is.eql([null, null, null, null, '_blank', '_blank', '_blank', '_blank'])
+    const own = window.document.querySelector('article a')
+    expect(own.classList.contains('external')).is.true()
+    expect(own.getAttribute('rel')).is.null()
+  })
+
   it('removes the sidebar when the page has no headings', () => {
     const page = '<div class="content"><article class="doc"><p>x</p></article></div><div class="toc"></div>'
     const window = runScript('02-on-this-page.js', page)

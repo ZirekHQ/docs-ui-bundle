@@ -31,10 +31,17 @@
       const location = window.location
       if (location && item.hostname && item.hostname !== location.hostname) {
         item.classList.add('external')
+        if (isOwnLink(item)) return
         item.setAttribute('target', '_blank')
         item.setAttribute('rel', 'noopener noreferrer')
       }
     })
+  }
+
+  // ZirekHQ's own sites and repositories open in the same tab
+  function isOwnLink (item) {
+    if (/(^|\.)zirekhq\.github\.io$/.test(item.hostname)) return true
+    return item.hostname === 'github.com' && /^\/ZirekHQ(\/|$)/.test(item.pathname)
   }
 
   function levelSelector (level) {

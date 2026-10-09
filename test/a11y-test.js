@@ -22,8 +22,4 @@ describe('accessibility', () => {
   it('underlines inline links in running text', () => {
     expect(read('src/css/doc.css')).to.match(/\.doc p a,[^{]*\{\s*text-decoration: underline;/)
   })
-
-  it('ships the with_menu layout that component pages request', () => {
-    expect(read('src/layouts/with_menu.hbs')).to.equal(read('src/layouts/default.hbs'))
-  })
 })

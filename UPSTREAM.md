@@ -38,4 +38,4 @@ Regenerate `package-lock.json` (`npm install --package-lock-only --ignore-script
 dependencies, then run `npm run coverage`, `npx gulp lint`, `npx gulp bundle`. Compare the unpacked bundle with the
 previous release (`diff -rq`): fonts and images must be byte-identical.
 
-Last synced with hominux: `4de939b` (#27) plus the toolchain upgrade (zirek #48, hominux #28).
+Last synced with hominux: `5779bc7` (#29).

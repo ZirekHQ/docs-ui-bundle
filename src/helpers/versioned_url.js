@@ -1,12 +1,13 @@
 'use strict'
 
 module.exports = function versionedUrl (siteUrl, versionSegment, url) {
+  const base = siteUrl ?? ''
   if (!url) {
     // occurs with stock pages like 404.html
     return url
   } else if (!versionSegment || url.includes(`/${versionSegment}/`)) {
-    return `${siteUrl}${url}`
+    return `${base}${url}`
   } else {
-    return `${siteUrl}/${versionSegment}${url}`
+    return `${base}/${versionSegment}${url}`
   }
 }

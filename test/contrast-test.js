@@ -73,6 +73,7 @@ const PAIRS = [
   ['navbar-font-color', 'navbar-background'],
   ['navbar-menu-font-color', 'navbar-menu-background'],
   ['footer-gray-text-color', 'footer-background'],
+  ['mark-font-color', 'mark-background-color'],
 ]
 
 describe('colour tokens', () => {

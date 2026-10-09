@@ -242,7 +242,7 @@ html.dark-theme #modal-versions .version-toggle span {
 
 #modal-versions .current {
   background-color: var(--mark-background-color);
-  color: #111;
+  color: var(--mark-font-color);
   align-items: center;
   border-radius: 4px;
   display: inline-block;

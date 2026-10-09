@@ -2,7 +2,7 @@
 
 const config = {
   checkLeaks: true,
-  globals: ['__coverage__', 'document', 'window'], // set on purpose by tests that stub the browser
+  globals: ['__coverage__', 'document', 'window', 'CSS'], // set on purpose by tests that stub the browser
   mochaGlobalTeardown () {
     if (!this.failures) logCoverageReportPath()
   },

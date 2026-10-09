@@ -1,20 +1,15 @@
-# ZirekHQ docs UI bundle
+# ZirekHQ docs UI bundle (archived)
 
-Antora UI bundle for the ZirekHQ documentation site (https://zirekhq.github.io/).
-
-It is a fork of the [hominux docs UI](https://github.com/hominux/docs-ui-bundle), which is itself a fork of
-[antora-ui-spring](https://github.com/spring-io/antora-ui-spring), rebranded with the ZirekHQ name, logo and colours.
-
-Use the latest build in an Antora playbook:
+This repository is archived. The ZirekHQ docs site now builds on
+[hominux/docs-ui-bundle](https://github.com/hominux/docs-ui-bundle) and keeps its brand (palette, logos, favicons,
+social preview) in [`supplemental-ui/`](https://github.com/ZirekHQ/ZirekHQ.github.io/tree/main/supplemental-ui) of
+`ZirekHQ.github.io`, using Antora's `ui.supplemental_files` and the `site.keys` described in the hominux README.
 
 ```yaml
 ui:
   bundle:
-    url: https://github.com/ZirekHQ/docs-ui-bundle/releases/download/bundle-latest/ui-bundle.zip
-    snapshot: true
+    url: https://github.com/hominux/docs-ui-bundle/releases/download/latest/ui-bundle.zip
+  supplemental_files: ./supplemental-ui
 ```
 
-Build it with `npm ci && npx gulp bundle`; the result is `build/ui-bundle.zip`. `npm test` runs the helper, branding and
-contrast tests.
-
-Licensed under MPL-2.0.
+The last build of this bundle stays available as the `bundle-latest` release asset. Licensed under MPL-2.0.
